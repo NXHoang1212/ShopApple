@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">AppleShop_FE</string>
+    <string name="facebook_app_id">1649982965446095</string>
+    <string name="fb_login_protocol_scheme">fb1649982965446095</string>
+    <string name="facebook_client_token">ad8afd127f107fc9291cf92ab72f37da</string>
+</resources>

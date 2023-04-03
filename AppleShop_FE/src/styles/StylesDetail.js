@@ -1,0 +1,196 @@
+import { StyleSheet } from "react-native";
+
+const stylesDetail = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#F0F0F0',
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    circle: {
+      borderRadius: 150,
+      width: 300,
+      height: 280,
+      marginTop: 30,
+      backgroundColor: "#E5E5E5",
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    viewheader: {
+      flexDirection: "row",
+    },
+    header1:{
+      right: 160,
+      bottom: 14,
+      top: 60,
+    },
+    header2:{
+      right: 162,
+      bottom: 14,
+      top: 60,
+    },
+    imgCircle1:{
+      width: 32,
+      height: 32,
+      left:  25,
+    },
+    imgCircle2:{
+      width: 35,
+      height: 35,
+      left:  308,
+    },
+    imgProduct: {
+      width: 240,
+      height: 200,
+      borderRadius: 30,
+      backgroundColor: "#E5E5E6",
+    },
+    menuProduct: {
+      top: 5,
+      height: 460,
+      width: 400,
+      margin: 10,
+      padding: 20,
+      backgroundColor: "#FFFFFF",
+      borderRadius: 35,
+    },
+    nameDateProduct: {
+     //flexDirection: 'row',
+     //justifyContent: 'space-evenly',
+    },
+    nameProduct: {
+      // fontFamily: 'Poppins',
+      lineHeight: 37,
+      color: "#000000",
+      fontWeight: "500",
+      fontSize: 22,
+    },
+    dateProduct: {
+      fontWeight: "500",
+      top: 20,
+      fontSize: 20,
+    },
+    priceProduct: {
+      // fontFamily: 'Poppins',
+      lineHeight: 50,
+      fontWeight: "500",
+      color: "#3560FC",
+      fontSize: 30,
+    },
+    colorName: {
+      padding: 2,
+      margin: 2,
+      fontWeight: "bold",
+    },
+    colorProduct: {
+      flexDirection: "row",
+      padding: 2,
+    },
+    SP: {
+      backgroundColor: "#F0F0F0",
+      width: 100,
+      height: 40,
+      borderRadius: 20,
+      paddingTop: 10,
+      margin: 5,
+      flexDirection: "row",
+      justifyContent: "center",
+    },
+    nameSP: {
+      color: "black",
+      fontSize: 15,
+      fontWeight: "400",
+    },
+    detailSP1: {
+      backgroundColor: "#D4A490",
+      width: 20,
+      height: 20,
+      borderRadius: 20,
+      marginRight: 10,
+    },
+    detailSP2: {
+      backgroundColor: "#AEAFB4",
+      width: 20,
+      height: 20,
+      borderRadius: 20,
+      marginRight: 10,
+    },
+    detailSP3: {
+      backgroundColor: "#646464",
+      width: 20,
+      height: 20,
+      borderRadius: 20,
+      marginRight: 10,
+    },
+    buttonProduct: {
+      flexDirection: "row",
+      padding: 2,
+    },
+    buttonSP: {
+      flexDirection: "row",
+      backgroundColor: "#F0F0F0",
+      width: 120,
+      height: 40,
+      borderRadius: 30,
+      padding: 10,
+      margin: 5,
+      justifyContent: "space-between",
+    },
+    buttonUp: {
+      backgroundColor: "#F0F0F0",
+      width: 20,
+      height: 20,
+      borderRadius: 20,
+    },
+    buttonDown: {
+      backgroundColor: "black",
+      width: 20,
+      height: 20,
+      borderRadius: 20,
+    },
+    quantity:{
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      padding: 7,
+      marginRight: 47,
+    },
+    TextQuantity:{
+      color: 'black',
+      fontSize: 18,
+    },
+    colorText: {
+      color: "white",
+      fontSize: 20,
+      alignItems: "center",
+      justifyContent: "center",
+      marginLeft: 9,
+    },
+    buttonBuy: {
+      flexDirection: "row",
+      backgroundColor: "black",
+      width: 150,
+      height: 40,
+      borderRadius: 30,
+      padding: 10,
+      margin: 5,
+      justifyContent: "space-between",
+    },
+    textBuy: {
+      paddingLeft: 12,
+      fontWeight: "500",
+      color: "white",
+      fontSize: 15,
+    },
+    paymentSheet:{
+      position: 'absolute',
+      bottom: 0,
+      width: '100%',
+      height: 300,
+      backgroundColor: 'white',
+      
+    },
+
+  });
+
+export default stylesDetail;

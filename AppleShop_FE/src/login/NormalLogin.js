@@ -10,6 +10,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const NormalLogin = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const goto1 = () => {
     navigation.navigate("ForgotPassword");
@@ -90,14 +92,30 @@ const NormalLogin = ({ navigation }) => {
           placeholder="Email"
           onChangeText={setEmail}
           value={email}
+          onBlur={() => {
+            if (!email) {
+              setEmailError('Mời bạn nhập email');
+            } else {
+              setEmailError('');
+            }
+          }}
         />
+         {emailError !== '' && <Text style={styles.errorMessage}>{emailError}</Text>}
         <TextInput
           style={{ backgroundColor: '#FFFFFF', height: 58, marginLeft: 2, borderRadius: 10, paddingLeft: 10, marginBottom: 10 }}
           placeholder="Password"
           onChangeText={setPassword}
           value={password}
           secureTextEntry={true}  
+          onBlur={() => {
+            if (!password) {
+              setPasswordError('Mời bạn nhập password');
+            } else {
+              setPasswordError('');
+            }
+          }}
         />
+        {passwordError !== '' && <Text style={styles.errorMessage}>{passwordError}</Text>}
         <TouchableOpacity onPress={goto1}>
           <Text style={{ fontWeight: 'bold', marginBottom: 20, fontSize: 14, lineHeight: 21, color: '#000000' }} >Forgot password ?</Text>
         </TouchableOpacity>
@@ -185,5 +203,12 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     height: 58,
+  },
+  errorMessage: {
+    color: 'red',
+    fontSize: 12,
+    marginLeft: 8,
+    bottom: 11,
+    fontWeight: '400',
   },
 });

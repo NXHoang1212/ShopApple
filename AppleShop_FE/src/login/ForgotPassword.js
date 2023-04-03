@@ -22,7 +22,7 @@ const ForgotPassword = ({navigation}) => {
     navigation.navigate("ResetPassword");
   }
   const goto2 = () => {
-    navigation.navigate("MyTab");
+    navigation.navigate("MyTabs");
   }
 
   const onEmailChange = (value) => {

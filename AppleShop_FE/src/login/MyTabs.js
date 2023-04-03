@@ -3,8 +3,6 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 import { View, Text, Image } from 'react-native';
 import Tabscreen2 from './Register';
 import NormalLogin from './NormalLogin';
-import ForgotPassword from './ForgotPassword';
-import ResetPassword from './ResetPassword';
 
 const Tab = createMaterialTopTabNavigator();
 

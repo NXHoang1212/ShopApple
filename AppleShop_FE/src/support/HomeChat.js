@@ -114,7 +114,7 @@ const HomeChat  = ({props, navigation}) => {
       renderBubble={props => (
           <Bubble {...props}
             wrapperStyle={{  left: {backgroundColor: '#F0F0F0', width: '90%', },
-            }}/>
+          }}/>
       )}/>
    </SafeAreaView>
   )

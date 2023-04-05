@@ -55,7 +55,7 @@ const forgotPassword = async (email) => {
             from: getConstant().MAIL, // gửi từ email nào 
             to: email,
             subject: 'Reset Password',
-            html: `<a href="http://localhost:3000/users/cpanel/reset-password/${token}">Reset Password</a>`
+            html: `<a href="http://localhost:3000/users/cpanel/reset-password?token=${token}">Reset Password</a>`
         };
         await transporter.sendMail(mailOptions);
         return true;
@@ -75,9 +75,10 @@ const resetPassword = async (token, password, confirm_password) => {
     if (password !== confirm_password){
         throw new Error('Dữ liệu không chính xác');
     }
+    console.log(token);
     const data = jwt.verify(token, 'shhhhh');
     if (data && data.id){
-        const result = await UserService.resetPassword(token, password);
+        const result = await UserService.TokenresetPassword(token, password);
         return result;
     }
     return false;

@@ -8,8 +8,6 @@ import Toast from 'react-native-toast-message';
 import { Badge, Header } from "react-native-elements";
 
 const HomePageScreen = ({ navigation, route }) => {
-
-
   //  Toast.show({
   //   type: 'success',
   //   text1: 'Xin chào 👋',
@@ -56,12 +54,11 @@ const HomePageScreen = ({ navigation, route }) => {
     handleTabPress(tabName);
     handleTabPress1("Tab 5.1");
   };
-    const [products, setProducts] = useState([]);
-    const [filteredProducts, setFilteredProducts] = useState([]);
-    const [searchText, setSearchText] = useState("");
-  useEffect(() => {
-    axios
-      .get(`${getConstant().HOST}/san-pham`)
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [searchText, setSearchText] = useState("");
+    useEffect(() => {
+       axios.get(`${getConstant().HOST}/san-pham`)
       .then(function (response) {
         setProducts(response.data);
         setFilteredProducts(response.data);
@@ -71,7 +68,6 @@ const HomePageScreen = ({ navigation, route }) => {
         console.log("error: ", error);
       });
   }, []);
-
   const handleSearch = (text) => {
     setSearchText(text);
     const filtered = products.filter((product) => {
@@ -643,12 +639,12 @@ const HomePageScreen = ({ navigation, route }) => {
       {/* tab1 nho chuyen api */}
       {activeTab2 === "Tab 1.1" && (
         <View style={{ flex: 2 }}>
-          <FlatList
-          numColumns={2}
-          data={filteredProducts}
-          renderItem={renderItem}
-          keyExtractor={(item) => item._id}
-          />
+         <FlatList
+          numColumns={2} // Hiển thị danh sách sản phẩm theo 2 cột
+          data={filteredProducts} // Dữ liệu danh sách sản phẩm (đã lọc theo danh mục nếu có)
+          renderItem={renderItem} // Component hiển thị cho từng item sản phẩm
+          keyExtractor={(item) => item._id} // Khóa duy nhất cho mỗi item
+        />
         </View>
       )}
       {activeTab2 === "Tab 1.2" && (

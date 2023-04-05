@@ -14,6 +14,7 @@ import ResetPassword from "../login/ResetPassword";
 import HomeChat from "../support/HomeChat";
 import HomeSupportPage from "../support/HomeSupportPage";
 import NormalLogin from "../login/NormalLogin";
+import CheckEmailVerfity from "../login/CheckEmailVerfity";
 
 
 
@@ -36,6 +37,7 @@ const StackNavigator = () => {
       <Stack.Screen name="CardForm" component={CardForm} options={{ headerShown: false }} />
       <Stack.Screen name="CartOrder" component={CartOrder} options={{ headerShown: false }} />
       <Stack.Screen name="HomeSupportPage" component={HomeSupportPage} options={{ headerShown: false }} />
+      <Stack.Screen name="CheckEmailVerfity" component={CheckEmailVerfity} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };

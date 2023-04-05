@@ -19,7 +19,7 @@ const ForgotPassword = ({navigation}) => {
   }, []);
 
   const goto1 = () => {
-    navigation.navigate("ResetPassword");
+    navigation.navigate("CheckEmailVerfity");
   }
   const goto2 = () => {
     navigation.navigate("MyTabs");

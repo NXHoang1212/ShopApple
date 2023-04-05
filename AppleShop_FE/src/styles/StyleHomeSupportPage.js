@@ -74,8 +74,8 @@ const stylesHomeSuport = StyleSheet.create({
     borderColor: 'black',
     borderRadius: 8,
     width: '100%',
-    paddingLeft: 30
-
+    paddingLeft: 20,
+    fontSize: 16,
   },
   tab: {
     paddingLeft: 24,
@@ -128,7 +128,6 @@ const stylesHomeSuport = StyleSheet.create({
   TextSupport1: {
     fontSize: 20,
     fontWeight: '400',
-
     color: '#616161',
     letterSpacing: 0.25
   },
@@ -137,7 +136,7 @@ const stylesHomeSuport = StyleSheet.create({
     fontSize: 18,
     fontWeight: '900',
     color: 'black',
-    letterSpacing: 0.25
+    letterSpacing: 0.5,
   },
   footer: {
     flex: 8,
@@ -190,11 +189,10 @@ const stylesHomeSuport = StyleSheet.create({
   notificationTitle: {
     fontSize: 17,
     fontWeight: '700',
-    letterSpacing:0.1,
     color: 'black',
-    paddingTop:10,
-    paddingBottom:10,
-
+    paddingTop:12,
+    paddingBottom:11,
+    letterSpacing:0.25,
   },
   notificatio2: {
     fontSize: 16,
@@ -211,7 +209,6 @@ const stylesHomeSuport = StyleSheet.create({
   
   },
   viewFlast: {
- 
   },
   notification:{
     backgroundColor: 'red',

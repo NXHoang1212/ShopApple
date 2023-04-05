@@ -16,10 +16,10 @@ const HomeSupportPage = ({ navigation }) => {
   const [notifications, setNotifications] = useState([
     { id: 1, title: 'Tại sao tài khoản của tôi bị lỗi ?', message: '⚠️ Lưu ý: Trường hợp bạn nhận thấy đơn giao không thành công không phải do lỗi của bạn, vui lòng liên hệ Nhân viên CSKH AppleShop để được hỗ trợ', visible: false },
     { id: 2, title: 'Cách theo dõi tình trạng vận chuyển\ncủa đơn hàng?', message: 'Message 2', visible: false },
-    { id: 3, title: ' Làm sao để mua hàng / đặt hàng trên ứng dụng AppleShop?', message: '⚠️ Lưu ý: Trường hợp bạn nhận thấy đơn giao không thành công không phải do lỗi của bạn, vui lòng liên hệ Nhân viên CSKH AppleShop để được hỗ trợ', visible: false },
+    { id: 3, title: 'Làm sao để mua hàng / đặt hàng trên\nứng dụng AppleShop?', message: '⚠️ Lưu ý: Trường hợp bạn nhận thấy đơn giao không thành công không phải do lỗi của bạn, vui lòng liên hệ Nhân viên CSKH AppleShop để được hỗ trợ', visible: false },
     { id: 4, title: 'Tại sao tài khoản của tôi bị lỗi ?', message: '⚠️ Lưu ý: Trường hợp bạn nhận thấy đơn giao không thành công không phải do lỗi của bạn, vui lòng liên hệ Nhân viên CSKH AppleShop để được hỗ trợ', visible: false },
     { id: 5, title: 'Cách theo dõi tình trạng vận chuyển\ncủa đơn hàng?', message: 'Message 2', visible: false },
-    { id: 6, title: ' Làm sao để mua hàng / đặt hàng trên ứng dụng AppleShop?', message: '⚠️ Lưu ý: Trường hợp bạn nhận thấy đơn giao không thành công không phải do lỗi của bạn, vui lòng liên hệ Nhân viên CSKH AppleShop để được hỗ trợ', visible: false },
+    { id: 6, title: 'Làm sao để mua hàng / đặt hàng trên\nứng dụng AppleShop?', message: '⚠️ Lưu ý: Trường hợp bạn nhận thấy đơn giao không thành công không phải do lỗi của bạn, vui lòng liên hệ Nhân viên CSKH AppleShop để được hỗ trợ', visible: false },
   ]);
   const [showNotifications, setShowNotifications] = useState(false);
 
@@ -59,7 +59,7 @@ const HomeSupportPage = ({ navigation }) => {
         <Text style={styles.textTitle}>Chúng tôi có thể giúp gì cho bạn?</Text>
         <View style={styles.viewSearch}>
           <TextInput style={styles.TextViewSearch}
-            placeholder="Name"
+            placeholder="Search"
           >
           </TextInput>
         </View>
@@ -89,7 +89,7 @@ const HomeSupportPage = ({ navigation }) => {
                 />
                 <View style={styles.viewTextSupport}>
                   <Text style={styles.TextSupport1}>Câu hỏi về</Text>
-                  <Text style={styles.TextSupport2}>Trả Hàng & Hoàn Tiền</Text>
+                  <Text style={styles.TextSupport2}>Trả Hàng &{'\n'}Hoàn Tiền</Text>
                 </View>
               </View>
             </View>
@@ -123,7 +123,6 @@ const HomeSupportPage = ({ navigation }) => {
                 }}
               >
                 <View style={styles.notificationHeader}>
-
                   <View style={styles.viewFlast}>
                     <Text style={styles.notificationTitle}>{item.title}</Text>
                     {item.visible && <Text style={styles.notificatio2}>{item.message}</Text>}

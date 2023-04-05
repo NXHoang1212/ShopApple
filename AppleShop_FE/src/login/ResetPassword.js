@@ -2,12 +2,33 @@ import { View, Text, StyleSheet, ScrollView, Image, TextInput, KeyboardAvoidingV
 import React, { useRef, useState, useEffect } from 'react'
 import { TouchableOpacity } from '@gorhom/bottom-sheet'
 import styles from '../styles/StylesResetPassword'
+import axios from 'axios';
+import getConstant  from '../../helper/Constanst';
 
 const ResetPassword = ({ navigation }) => {
+  const [password, setPassword] = useState('');
+  const [confirm_password, setConfirmPassword] = useState('');
+  const [token, setToken] = useState('');
+
 
   const goback = () => {
     navigation.navigate("ForgotPassword")
   }
+
+  const resetPassword = async (token, password, confirm_password) => {
+    try {
+      const response = await axios.post('http://localhost:3000/users/cpanel/reset-password', {
+        token: token,
+        password: password,
+        confirm_password: confirm_password
+      });
+      return response.data.status;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
 
   return (
     <View style={styles.container}>

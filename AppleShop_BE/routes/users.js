@@ -5,10 +5,6 @@ var jwt = require("jsonwebtoken");
 var authen = require("../middleware/authen");
 
 /* GET users listing. */
-router.get("/", function (req, res, next) {
-  res.send("respond with a resource");
-});
-
 /* http://localhost:3000/users/api/register */
 router.post("/api/register", async function (req, res, next) {
   try {
@@ -39,7 +35,7 @@ router.post("/api/login", async function (req, res, next) {
   }
 });
 
-router.get("/api/token-jwt", [authen], function (req, res, next) {
+router.get("/api/api-token", [authen], function (req, res, next) {
   console.log(req.user);
   res.json({ message: "ok" });
 });
@@ -115,19 +111,44 @@ router.post('/api/forgot-password', async function (req, res, next) {
   }
 });
 
-
-
 // http://localhost:3000/users/cpanel/reset-password
 router.post('/cpanel/reset-password', async function (req, res, next) {
   try {
-    const { password, password_confirmation, token } = req.body;
-    const response = await UserController.resetPassword(password, password_confirmation, token);
-    res.status(200).json({ status: response });
+    const { token, password, confirm_password } = req.body;
+    const response = await UserController.resetPassword( token, password, confirm_password );
+    res.status(200).json({ message: "Đổi mật khẩu thành công" });
   } catch (error) {
     console.log(error);
-    res.status(414).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 });
 
+// http://localhost:3000/users/cpanel/reset-password?token=123
+router.get('/cpanel/reset-password', async function (req, res, next) {
+  try {
+    const { token } = req.query;
+    const response = await UserController.checkResetPasswordToken(token);
+    if (response) {
+      return res.render('users/reset-password', { token });
+    }   
+    throw new Error('Token không hợp lệ');
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
+});
 
+// router.get('/cpanel/reset-password', async function (req, res, next) {
+//   try {
+//     const { token } = req.query;
+//     const response = await UserController.checkResetPasswordToken(token);
+//     if (response) {
+//       return res.status(200).json({ token });
+//     }   
+//     throw new Error('Token không hợp lệ');
+//   } catch (error) {
+//     console.log(error);
+//     res.status(400).json({ error: error.message });
+//   }
+// });
 module.exports = router;

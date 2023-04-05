@@ -11,6 +11,7 @@ const ProfileScreen = ({navigation}) => {
   const [avatar, setAvatar] = useState(null);
   const [productId, setProductId] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [imageUri, setImageUri] = useState(null);
   
   const nextScreen = () => {
     navigation.navigate('EditProfile');
@@ -33,6 +34,14 @@ const ProfileScreen = ({navigation}) => {
     navigation.navigate('CartOrder', { productId: productId });
   };
 
+  const nextScreen5 = () => {
+    navigation.navigate('ForgotPassword');
+  }
+
+  const nextScreen6 = () => {
+    navigation.navigate('CardForm');
+  }
+
   const takePhoto = () => {
     const options = {
       mediaType: 'photo',
@@ -41,7 +50,7 @@ const ProfileScreen = ({navigation}) => {
     };
     launchCamera(options, response => {
       console.log('Response = ', response);
-
+  
       if (response.didCancel) {
         console.log('Bạn đã không chụp lại hình ảnh của mình');
       } else if (response.error) {
@@ -49,11 +58,8 @@ const ProfileScreen = ({navigation}) => {
       } else if (response.customButton) {
         console.log('User tapped custom button: ', response.customButton);
       } else {
-        const source = {uri: response.uri};
-        setAvatar(source);
-        if (typeof response.uri === 'object') {
-          setAvatar(response.uri.toString());
-        }
+        const source = { uri: response.uri };
+        setAvatar(source.uri); // Lưu đường dẫn của ảnh mới vào state avatar
       }
     });
   };
@@ -69,11 +75,12 @@ const ProfileScreen = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <View style={styles.UploadImage}>
-        <Image
-          source={require('../../assets/phuoc.jpg')}
-          style={styles.nameimage}
-          onPress={takePhoto}
-        />
+      <TouchableOpacity onPress={takePhoto}>
+          <Image
+            source={avatar ? { uri: avatar } : require('../../assets/phuoc.jpg')}
+            style={styles.nameimage}
+          />
+        </TouchableOpacity>
         <Text style={ {fontSize: 18, color: '#000000', fontWeight: '500',marginBottom:10}}>
           Welcome, Võ Ngọc Phước
         </Text>
@@ -90,12 +97,12 @@ const ProfileScreen = ({navigation}) => {
               leading={<Icon name="account" size={24} />}
               onPress={nextScreen}
             />
-            <ListItem
+            <ListItem onPress={nextScreen5}
               title="Change Password"
               leading={<Icon name="key" size={24} />}
             />
             <Text style={styles.acc}>Shopping</Text>
-            <ListItem 
+            <ListItem onPress={nextScreen6}
             title="Payment" 
             leading={<Icon name="atm" size={24} />} 
             />

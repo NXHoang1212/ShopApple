@@ -17627,6 +17627,7 @@ be a descendant of the grid when it is being dragged.
   margin-bottom: 120px;
   font-family: "Niconne";
   color: #fff;
+  margin-left: 138px;
 }
 
 .login-content .logo h1 {
@@ -17635,6 +17636,7 @@ be a descendant of the grid when it is being dragged.
 }
 
 .login-content .login-box{
+  left: 62px  ;
   color: var(--white);
   position: relative;
   min-width: 350px;
@@ -17686,7 +17688,7 @@ be a descendant of the grid when it is being dragged.
   bottom: 100px;
   left: 0;
   right: 0;
-  padding: 40px;
+  padding: 20px;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   -webkit-transition: all 0.5s ease-in-out;

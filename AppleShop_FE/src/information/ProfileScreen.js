@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {ListItem} from '@react-native-material/core';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {SafeAreaView, View, StyleSheet, Text, Button, ToastAndroid} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Image} from 'react-native-elements';
 import styles from '../styles/StyleProfileScreen';
 import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 
 const ProfileScreen = ({navigation}) => {
   const [avatar, setAvatar] = useState(null);
@@ -94,30 +96,30 @@ const ProfileScreen = ({navigation}) => {
           <View styles={styles.viewitem}>
             <ListItem
               title="Information"
-              leading={<Icon name="account" size={24} />}
               onPress={nextScreen}
+              leading={<Icon name="account-edit" size={24} color="#000000" />}
             />
             <ListItem onPress={nextScreen5}
               title="Change Password"
-              leading={<Icon name="key" size={24} />}
+              leading={<Icon name="lock-reset" size={24} color="#000000" />}
             />
             <Text style={styles.acc}>Shopping</Text>
             <ListItem onPress={nextScreen6}
-            title="Payment" 
-            leading={<Icon name="atm" size={24} />} 
+            title="Payment"
+            leading={<Icon name="credit-card-settings-outline" size={24} color="#000000" />}
             />
             <ListItem onPress={nextScreen4}
             title="Cart" 
-            leading={<Icon name="cart" size={24} />} 
+            leading={<Icon name="cart-arrow-right" size={24} color="#000000" />}
             />
             <ListItem
               onPress={nextScreen2}
               title="Support"
-              leading={<Icon name="car" size={24} />}
+              leading={<Icon name="charity" size={24} color="#000000" />}
             />
             <ListItem
               title="Voucher"
-              leading={<Icon name="sale" size={24} />}
+              leading={<Icon name="sale" size={24} color="#000000" />}
             />
           </View>
           <View style={styles.signout}>

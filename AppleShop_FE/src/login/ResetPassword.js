@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { TouchableOpacity } from '@gorhom/bottom-sheet'
 import styles from '../styles/StylesResetPassword'
 import axios from 'axios';
-import getConstant  from '../../helper/Constanst';
+import getConstant  from '../../ultlis/Constanst';
 
 const ResetPassword = ({ navigation }) => {
   const [password, setPassword] = useState('');

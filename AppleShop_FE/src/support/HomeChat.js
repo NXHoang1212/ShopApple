@@ -2,11 +2,10 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import React, {useEffect, useState, useCallback} from 'react'
 import { GiftedChat, InputToolbar, Bubble, Composer, Send } from 'react-native-gifted-chat';
 import SafeAreaView from 'react-native-safe-area-view';
-import moment from 'moment';
 import 'moment/locale/vi'; 
 import { Badge } from "react-native-elements";
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Pressable } from '@react-native-material/core';
+
 
 const chatbot = require('../../assets/chatbot.png');
 const avatar = require('../../assets/phuoc.jpg');

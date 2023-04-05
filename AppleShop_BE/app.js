@@ -6,11 +6,14 @@ var logger = require('morgan');
 const mongoose = require("mongoose");
 
 
-require("./modules/users/UserModel");
+// require("./modules/users/UserModel");
+require("./model/UserModel");
 
-require("./modules/categories/CategoryModel");
+// require("./modules/categories/CategoryModel");
+require("./model/CategoryModel");
 
-require("./modules/products/ProductModel");
+// require("./modules/products/ProductModel");
+require("./model/ProductModel");
 
 
 var indexRouter = require('./routes/index');

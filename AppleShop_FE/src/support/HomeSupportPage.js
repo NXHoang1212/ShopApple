@@ -1,8 +1,5 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, TextInput, FlatList } from 'react-native'
-
 import styles from '../styles/StyleHomeSupportPage'
-import HomePageScreen from '../home/HomePageScreen'
-import EditProfile from '../information/EditProfile'
 import React, { useState } from 'react'
 
 

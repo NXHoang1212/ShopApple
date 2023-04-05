@@ -1,7 +1,7 @@
 
-const UserService = require('./UserSerVice');
+const UserService = require('../service/UserService');
 const mailer = require('nodemailer');
-const getConstant = require('../../helper/constanst').getConstant;
+const getConstant = require('../utlis/constanst').getConstant;
 const jwt = require('jsonwebtoken');
 
 const register = async (name, email, password, confirm_password, mobile) =>{

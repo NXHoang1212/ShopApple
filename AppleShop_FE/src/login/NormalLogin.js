@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { ToastAndroid } from 'react-native';
 import { LoginButton, AccessToken, GraphRequest, GraphRequestManager, LoginManager } from 'react-native-fbsdk-next';
-import  getConstant  from '../../helper/Constanst';
+import  getConstant  from '../../ultlis/Constanst';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 

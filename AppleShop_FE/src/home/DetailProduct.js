@@ -1,7 +1,7 @@
 import { View, Text, Dimensions, StyleSheet, Image, TouchableOpacity, ScrollView} from "react-native";
 import React, { useEffect, useState, useRef, useCallback, useMemo   } from "react";
 import axios from "axios";
-import getConstant from "../../helper/Constanst";
+import getConstant from "../../ultlis/Constanst";
 import stylesDetail from "../styles/StylesDetail";
 
 const DetailProduct = ({ navigation, route}) => {

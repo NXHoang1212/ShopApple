@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-const ProductController = require('../modules/products/ProductController');
-const CategoryController = require('../modules/categories/CategoryController');
+const ProductController = require('../controller/ProductController');
+const CategoryController = require('../controller/CategoryController');
 const middleware = require('../middleware/upload');
-const getConstant = require('../helper/constanst').getConstant;
+const getConstant = require('../utlis/constanst').getConstant;
 
 
 // /** 

@@ -1,5 +1,5 @@
 
-const categoryModel = require('./CategoryModel');
+const categoryModel = require('../model/CategoryModel');
 
 const get = async () => {
     //select *  form categories

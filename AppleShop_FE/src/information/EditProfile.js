@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity, Button, TextInput, Pressable, ToastAndroid, Dimensions } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
-import getConstant from '../../helper/Constanst';
+import getConstant from '../../ultlis/Constanst';
 import styles from '../styles/StyleEditProfile';
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 

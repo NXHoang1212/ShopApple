@@ -2,7 +2,7 @@ import { View, Text , StyleSheet, TouchableOpacity, Image, ScrollView,TextInput}
 import React, {useState} from 'react'
 import { Icon } from 'react-native-elements'
 import axios from 'axios'
-import getConstant from '../../helper/Constanst'
+import getConstant from '../../ultlis/Constanst'
 import { ToastAndroid } from 'react-native'
 
 const Register = ({navigation}) => {

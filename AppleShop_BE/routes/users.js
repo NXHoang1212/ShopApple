@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var UserController = require("../modules/users/UserController");
+var UserController = require("../controller/UserController");
 var jwt = require("jsonwebtoken");
 var authen = require("../middleware/authen");
 

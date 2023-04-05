@@ -2,7 +2,7 @@ import { View, Text, Button, TextInput } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Image, ScrollView, TouchableOpacity, FlatList } from "react-native";
 import axios from "axios";
-import getConstant from "../../helper/Constanst";
+import getConstant from "../../ultlis/Constanst";
 import stylesHome from "../styles/StylesHome";
 import Toast from 'react-native-toast-message';
 import { Badge, Header } from "react-native-elements";

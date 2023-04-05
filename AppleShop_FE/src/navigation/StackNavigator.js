@@ -13,7 +13,6 @@ import ForgotPassword from "../login/ForgotPassword";
 import ResetPassword from "../login/ResetPassword";
 import HomeChat from "../support/HomeChat";
 import HomeSupportPage from "../support/HomeSupportPage";
-import NormalLogin from "../login/NormalLogin";
 import CheckEmailVerfity from "../login/CheckEmailVerfity";
 
 

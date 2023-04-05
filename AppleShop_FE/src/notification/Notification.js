@@ -3,10 +3,7 @@ import React from 'react'
 import Toast from 'react-native-toast-message';
 import stylesNotification from '../styles/StyleNotification';
 
-
 const Notification = ({navigation}) => {
-
-
   data = [
     {
       id: '1',

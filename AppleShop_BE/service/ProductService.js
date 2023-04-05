@@ -1,5 +1,5 @@
 
-const productModel = require('./ProductModel');
+const productModel = require('../model/ProductModel');
 
 const get = async () => {
     //select * form products

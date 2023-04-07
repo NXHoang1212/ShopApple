@@ -5,13 +5,12 @@ const ProductController = require('../controller/ProductController');
 const CategoryController = require('../controller/CategoryController');
 const middleware = require('../middleware/upload');
 const getConstant = require('../utlis/constanst').getConstant;
+const paypal = require('paypal-rest-sdk');
 
 
-
-// /** chạy trên web
-//  * Hiển thị trang danh sách sản phẩm 
-//  * http://localhost:3000/san-pham/  
-//  */
+/** chạy trên web
+ * Hiển thị trang danh sách sản phẩm 
+ * http://localhost:3000/san-pham/  */
 // router.get('/', async function(req, res, next){
 //     let products = await ProductController.get();
 //     products = products.map((p, index) => {
@@ -90,6 +89,80 @@ const getConstant = require('../utlis/constanst').getConstant;
 // });
 
 
+paypal.configure({
+  'mode': 'sandbox', //sandbox or live
+  'client_id': 'AW1aSiGIC14SjUesBwIYKYhFkrjn3zpEOeh62sGyEOiCRmOFoniDjS4NuDRVlurvq6fOpTgt99Vkvzl7',
+  'client_secret': 'EOMs137gGXTWWhRFMlKWMGVPbkvO403tUAuYr00P14YP3GIBariDUbtifyvgfZOZgL_2RvfCUTmpPz0K',
+});
+
+/* https://localhost:3000/san-pham/paypal */
+router.get('/paypal', function (req, res, next) {
+  var create_payment_json = {
+    "intent": "sale",
+    "payer": {
+      "payment_method": "paypal"
+    },
+    "redirect_urls": {
+      "return_url": `${getConstant().HOST}/san-pham/success`,
+      "cancel_url": `${getConstant().HOST}/san-pham/cancel`
+    },
+    "transactions": [{
+      "item_list": {
+        "items": [{
+          "name": "item",
+          "sku": "item",
+          "price": "1.00",
+          "currency": "USD",
+          "quantity": 1
+        }]
+      },
+      "amount": {
+        "currency": "USD",
+        "total": "1.00"
+      },
+      "description": "This is the payment description."
+    }]
+  };
+  paypal.payment.create(create_payment_json, function (error, payment) {
+    if (error) {
+      throw error;
+    } else {
+      console.log("Create Payment Response");
+      console.log(payment);
+      res.redirect(payment.links[1].href);
+    }
+  });
+});
+
+router.get('/success', function (req, res, next) {
+  var PayerID = req.query.PayerID;
+  var paymentId = req.query.paymentId;
+  var execute_payment_json = {
+    payer_id: PayerID,
+    transactions: [
+      {
+        amount: {
+          currency: "USD",
+          total: "1.00"
+        }
+      }
+    ]
+  };
+  paypal.payment.execute(paymentId, execute_payment_json, function (error, payment ) {
+    if (error) {
+      console.log(error.response);
+      throw error;
+    } else {
+      console.log("Get Payment Response");
+      console.log(JSON.stringify(payment));
+      res.render('success');
+    }
+  });
+});
+
+router.get('/cancel', function (req, res, next) {
+  res.send('cancel');
+});
 /* GET home page. */
 /*Hiển thị trang tạo mới sản phẩm*/
 //http://localhost:3000/san-pham/tao-moi

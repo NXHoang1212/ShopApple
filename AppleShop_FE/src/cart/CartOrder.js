@@ -1,21 +1,34 @@
-import { View, Text, FlatList, Button, Image } from 'react-native';
+import { View, Text, FlatList, Button, Image, Modal } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import StyleCartOrder from '../styles/StyleCartOrder';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { WebView } from 'react-native-webview';
+import  getConstant  from '../../ultlis/Constanst';
 
 const CartOrder = ({ navigation, route }) => {
   const { cart: cartToAdd } = route.params;
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const [status, setStatus] = useState("Pending");
+
+  const handleResponse = (data) => {
+    if (data.title === "success") {
+      setShowModal(false);
+      setStatus("Complete");
+    } else if (data.title === "cancel") {
+      setShowModal(false);
+      setStatus("Cancelled");
+    } else {
+      return;
+    }
+  };
 
   const nextScreen = (id) => {
     navigation.navigate("DetailProduct", { id: id });
   };
 
-  const nextScreen1 = () => {
-    navigation.navigate("CardForm");
-  };
 
   const nextScreen2 = () => {
     navigation.navigate("HomaPageScreen");
@@ -63,7 +76,14 @@ const CartOrder = ({ navigation, route }) => {
   };
 
   return (
-    <View style={StyleCartOrder.container}>   
+    <View style={StyleCartOrder.container}> 
+     <Modal visible={showModal} onRequestClose={() => setShowModal(false)}>
+        <WebView
+          source={{ uri: `${getConstant().HOST}/san-pham/paypal` }}
+          onNavigationStateChange={handleResponse}
+          injectedJavaScript={`document.f1.submit()`}
+        />
+      </Modal>  
         <View style={StyleCartOrder.header}>
           <TouchableOpacity style={{width: 55}} onPress={nextScreen}>
                <Image style={{left: 25, width: 30, height: 30}} source={require('../../assets/backone.png')} />
@@ -113,7 +133,7 @@ const CartOrder = ({ navigation, route }) => {
               <Text style={StyleCartOrder.totalPrice1}>{totalPrice.toLocaleString('vi-VN' ,{style: 'currency', currency: 'VND' })}</Text>
           </View>
           <View style={StyleCartOrder.payment} >
-            <TouchableOpacity onPress={nextScreen1}>
+            <TouchableOpacity onPress={() => setShowModal(true)}>
                   <Text style={StyleCartOrder.textbutton1}>Thanh toán</Text>
             </TouchableOpacity>
           </View>

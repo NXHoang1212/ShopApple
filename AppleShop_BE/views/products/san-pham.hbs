@@ -29,13 +29,14 @@
                     <td>
                         <button onclick="goDetail('{{this._id}}');">Sửa</button>
                         <button onclick="goXoa('{{this._id}}');">Xóa</button>
+                        <form action="/san-pham/paypal">
+                            <button type="submit">Payment</button>
+                        </form>
                     </td>
-
                 </tr>
                 {{/each}}
             </tbody>
-        </table>
-        
+        </table>       
     </div>
 </body>
 <script>

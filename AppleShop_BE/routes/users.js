@@ -66,7 +66,7 @@ router.post("/cpanel/login", async function (req, res, next) {
       res.render('index');
     } else {
       throw new Error("Sai email hoặc mật khẩu");
-    }
+    } 
   } catch (error) {
     console.log(error);
     next(error);
@@ -138,17 +138,4 @@ router.get('/cpanel/reset-password', async function (req, res, next) {
   }
 });
 
-// router.get('/cpanel/reset-password', async function (req, res, next) {
-//   try {
-//     const { token } = req.query;
-//     const response = await UserController.checkResetPasswordToken(token);
-//     if (response) {
-//       return res.status(200).json({ token });
-//     }   
-//     throw new Error('Token không hợp lệ');
-//   } catch (error) {
-//     console.log(error);
-//     res.status(400).json({ error: error.message });
-//   }
-// });
 module.exports = router;

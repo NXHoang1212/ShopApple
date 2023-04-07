@@ -24,7 +24,7 @@ const EditProfile = ({ navigation }) => {
 
   useEffect(() => {
     // Gọi API lấy thông tin người dùng
-    axios.get(`${getConstant().HOST}/users/api/user/64285748d2184995bce6be00`)
+    axios.get(`${getConstant().HOST}/users/api/user/642ea261f76cfa2fe4b6e38f`)
       .then(function (response) {
         // Lưu thông tin người dùng vào state
         setName(response.data.user.name);
@@ -155,7 +155,7 @@ const EditProfile = ({ navigation }) => {
       </View>
       <View style={styles.containerLogout}>
         <TouchableOpacity style={styles.logout} onPress={() => {
-          axios.post(`${getConstant().HOST}/users/api/updateUser/64285748d2184995bce6be00`, {
+          axios.post(`${getConstant().HOST}/users/api/updateUser/642ea261f76cfa2fe4b6e38f`, {
             name: name,
             mobile: mobile,
             age: age,

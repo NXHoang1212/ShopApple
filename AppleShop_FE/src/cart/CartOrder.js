@@ -2,7 +2,7 @@ import { View, Text, FlatList, Button, Image } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import StyleCartOrder from '../styles/StyleCartOrder';
-import stylesCreditCard from '../styles/StyleCreditCard';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CartOrder = ({ navigation, route }) => {
   const { cart: cartToAdd } = route.params;
@@ -20,19 +20,23 @@ const CartOrder = ({ navigation, route }) => {
   const nextScreen2 = () => {
     navigation.navigate("HomaPageScreen");
   };
-
-
   useEffect(() => {
-    if (cartToAdd) {
-      setCartItems([...cartItems, ...cartToAdd]);
-    }
-  }, [cartToAdd]);
+    const fetchCartItems = async () => {
+      const cartItemsJson = await AsyncStorage.getItem('cartItems');
+      if (cartItemsJson) {
+        const cartItems = JSON.parse(cartItemsJson);
+        setCartItems([...cartItems, ...cartToAdd]);
+      }
+    };
+
+    fetchCartItems();
+  }, []);
 
   useEffect(() => {
     const newTotalPrice = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
     setTotalPrice(newTotalPrice);
+    AsyncStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
-
 
   const handleRemoveFromCart = (itemId) => {
     setCartItems((prevCartItems) =>
@@ -70,8 +74,8 @@ const CartOrder = ({ navigation, route }) => {
        <View style={StyleCartOrder.Line}></View> 
       <FlatList
         data={cartItems}
-        renderItem={({ item }) => (
-            <View style={StyleCartOrder.body}>
+        renderItem={({ item, index }) => (
+            <View key={item.id} style={StyleCartOrder.body}>
               <View style={StyleCartOrder.viewOrder}>
                 <Image style={{ width: 119, height: 88, top: 10 }}
                     source={ item.image ? { uri: item.image } : require('../../assets/1.jpg')}
@@ -100,7 +104,7 @@ const CartOrder = ({ navigation, route }) => {
               <View style={StyleCartOrder.linehight}></View>
             </View> 
         )}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
       />
       <View style={StyleCartOrder.viewtotalprice}>
         <View style={StyleCartOrder.button}>

@@ -7,7 +7,8 @@ const middleware = require('../middleware/upload');
 const getConstant = require('../utlis/constanst').getConstant;
 
 
-// /** 
+
+// /** chạy trên web
 //  * Hiển thị trang danh sách sản phẩm 
 //  * http://localhost:3000/san-pham/  
 //  */
@@ -157,12 +158,6 @@ try{
 });
 
 /**
- *  Hiện thị giỏ hảng sản phẩm
- */
-
-
-
-/**
 * Hiển thị trang chi tiết sản phẩm 
 * http://localhost:3000/:id/detail
 */
@@ -206,5 +201,33 @@ try{
 }
 });
 
+router.post('/', (req, res, next) => {
+  const gateway = new braintree.BraintreeGateway({
+    environment: braintree.Environment.Sandbox,
+    // Use your own credentials from the sandbox Control Panel here
+    merchantId: '<use_your_merchant_id>',
+    publicKey: '<use_your_public_key>',
+    privateKey: '<use_your_private_key>'
+  });
+
+  // Use the payment method nonce here
+  const nonceFromTheClient = req.body.paymentMethodNonce;
+  // Create a new transaction for $10
+  const newTransaction = gateway.transaction.sale({
+    amount: '10.00',
+    paymentMethodNonce: nonceFromTheClient,
+    options: {
+      // This option requests the funds from the transaction
+      // once it has been authorized successfully
+      submitForSettlement: true
+    }
+  }, (error, result) => {
+      if (result) {
+        res.send(result);
+      } else {
+        res.status(500).send(error);
+      }
+  });
+});
 
 module.exports = router;

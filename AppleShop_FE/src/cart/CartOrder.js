@@ -13,22 +13,23 @@ const CartOrder = ({ navigation, route }) => {
   const [showModal, setShowModal] = useState(false);
   const [status, setStatus] = useState("Pending");
 
-  const handleResponse = (data) => {
-    if (data.title === "success") {
-      setShowModal(false);
-      setStatus("Complete");
-    } else if (data.title === "cancel") {
-      setShowModal(false);
-      setStatus("Cancelled");
-    } else {
-      return;
-    }
-  };
 
   const nextScreen = (id) => {
     navigation.navigate("DetailProduct", { id: id });
   };
+  const handleNavigationStateChange = (newState) => {
+    const url = newState.url;
+    if (url.includes('/success')) {
+      setShowModal(false);
+      navigation.navigate('Success');
+    } else if (url.includes('/cancel')) {
+      setShowModal(false);
+    }
+  };
 
+  const nextScreen3 = () => {
+    navigation.navigate("HomaPageScreen");
+  };
 
   const nextScreen2 = () => {
     navigation.navigate("HomaPageScreen");
@@ -78,12 +79,11 @@ const CartOrder = ({ navigation, route }) => {
   return (
     <View style={StyleCartOrder.container}> 
      <Modal visible={showModal} onRequestClose={() => setShowModal(false)}>
-        <WebView
-          source={{ uri: `${getConstant().HOST}/san-pham/paypal` }}
-          onNavigationStateChange={handleResponse}
-          injectedJavaScript={`document.f1.submit()`}
-        />
-      </Modal>  
+      <WebView
+        source={{ uri: `${getConstant().HOST}/san-pham/paypal` }}
+        onNavigationStateChange={handleNavigationStateChange}
+      />
+    </Modal>
         <View style={StyleCartOrder.header}>
           <TouchableOpacity style={{width: 55}} onPress={nextScreen}>
                <Image style={{left: 25, width: 30, height: 30}} source={require('../../assets/backone.png')} />

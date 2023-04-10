@@ -7,13 +7,13 @@ import { ToastAndroid } from 'react-native'
 
 const Register = ({navigation}) => {
   /*Biến khai báo trong tên để sử dụng axios*/
-  const [name, setName] = useState('');
+  const [fullname, setfullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirm_password, setConfirm_Password] = useState('');
   const [mobile, setMobile] = useState('');
   /*Biến bắt lỗi khai báo cho từng input */
-  const [nameError, setNameError] = useState('');
+  const [fullnameError, setfullNameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
@@ -26,7 +26,7 @@ const Register = ({navigation}) => {
   };
   const handleRegister = () => {
       axios.post(`${getConstant().HOST}/users/api/register`, {
-        name: name,
+        fullname: fullname,
         email: email,
         password: password,
         confirm_password: confirm_password,
@@ -40,7 +40,6 @@ const Register = ({navigation}) => {
       .catch(function (error) {
         console.log('error: ',error);
         ToastAndroid.show('Đăng kí thất bại', ToastAndroid.SHORT);
-        navigation.reset({routes: [{ name: 'MyTabs' }], });
       });
   };
 
@@ -64,18 +63,18 @@ const Register = ({navigation}) => {
           </View>
         <TextInput style={{ backgroundColor: '#FFFFFF', height: 58,marginLeft:2,borderRadius:10,paddingLeft:10,marginBottom:15}}
           placeholder="Full Name"
-          onChangeText={text => setName(text)}
-          value={name}
+          onChangeText={text => setfullName(text)}
+          value={fullname}
           onBlur={() => {
-            const nameArray = name.split(' ');
-            if (nameArray.length < 2) {
-              setNameError('Mời bạn nhập đầy đủ họ tên');
+            const fullnameArray = fullname.split(' ');
+            if (fullnameArray.length < 2) {
+              setfullNameError('Mời bạn nhập đầy đủ họ tên');
             } else {
-              setNameError('');
+              setfullNameError('');
             }
           }}
         />
-        {nameError !== '' && <Text style={styles.errorMessage}>{nameError}</Text>}
+        {fullnameError !== '' && <Text style={styles.errorMessage}>{fullnameError}</Text>}
         <TextInput  style={{ backgroundColor: '#FFFFFF', height: 58,marginLeft:2,borderRadius:10,paddingLeft:10,marginBottom:15  }}
           placeholder="Email"
           onChangeText={text => setEmail(text)}

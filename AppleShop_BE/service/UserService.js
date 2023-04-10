@@ -15,21 +15,21 @@ const login = async (email, password) => {
     return null;
 }
 
-const register = async (name, email, password, confirm_password, mobile) => {
+const register = async (fullname, email, password, confirm_password, mobile) => {
     //1. tạo user mới'
     //2. Lưu user mới
     //3. Trả về user mới
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
-    const user = new UserModel({ name, email, password: hash, confirm_password, mobile });
+    const user = new UserModel({ fullname, email, password: hash, confirm_password, mobile });
     await user.save();
     return user;
 }
 
-const update = async (id, name, age, gender, dateofbirth, city, address  ) => {
+const update = async (id, fullname, age, gender, dateofbirth, city, address  ) => {
     const user = await UserModel.findById(id);
     const model = await UserModel.findByIdAndUpdate(id,
-        { name, age, gender, dateofbirth, city, address  });
+        { fullname, age, gender, dateofbirth, city, address  });
     return model;
 }
 

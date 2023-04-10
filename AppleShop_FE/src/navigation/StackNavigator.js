@@ -24,10 +24,10 @@ const Stack = createStackNavigator();
 const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      {/* <Stack.Screen name="SlashSreen" component={SlashSreen} options={{ headerShown: false }} />
+      <Stack.Screen name="SlashSreen" component={SlashSreen} options={{ headerShown: false }} />
       <Stack.Screen name="MyTabs" component={MyTabs} options={{ headerShown: false }} /> 
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{ headerShown: false }} />
-      <Stack.Screen name="ResetPassword" component={ResetPassword} options={{ headerShown: false }} /> */}
+      <Stack.Screen name="ResetPassword" component={ResetPassword} options={{ headerShown: false }} />
       <Stack.Screen name="HomePageScreen" component={HomePageScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Notificaiton" component={Notificaiton} options={{ headerShown: false }} />
       <Stack.Screen name="DetailProduct" component={DetailProduct} options={{ headerShown: false }} />

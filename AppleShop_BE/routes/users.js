@@ -8,8 +8,8 @@ var authen = require("../middleware/authen");
 /* http://localhost:3000/users/api/register */
 router.post("/api/register", async function (req, res, next) {
   try {
-    const { name, email, password, confirm_password, mobile} = req.body;
-    const user = await UserController.register( name, email, password, confirm_password, mobile );
+    const { fullname, email, password, confirm_password, mobile} = req.body;
+    const user = await UserController.register( fullname, email, password, confirm_password, mobile );
     res.status(200).json({ user });
   } catch (error) {
     res.status(414).json({ error: error.message });

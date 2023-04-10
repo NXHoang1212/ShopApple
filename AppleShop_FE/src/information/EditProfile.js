@@ -8,7 +8,7 @@ import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 const EditProfile = ({ navigation }) => {
 
   const windownWidth = Dimensions.get('window').width;
-  const [name, setName] = useState();
+  const [fullname, setfullName] = useState();
   const [email, setEmail] = useState();
   const [mobile, setMobile] = useState();
   const [age, setAge] = useState();
@@ -24,10 +24,10 @@ const EditProfile = ({ navigation }) => {
 
   useEffect(() => {
     // Gọi API lấy thông tin người dùng
-    axios.get(`${getConstant().HOST}/users/api/user/642d5c947c5c96b5db8c823b`)
+    axios.get(`${getConstant().HOST}/users/api/user/643405fb825bf73be7540a7b`)
       .then(function (response) {
         // Lưu thông tin người dùng vào state
-        setName(response.data.user.name);
+        setfullName(response.data.user.fullname);
         setEmail(response.data.user.email);
         setMobile(response.data.user.mobile);
         setAge(response.data.user.age);
@@ -35,7 +35,7 @@ const EditProfile = ({ navigation }) => {
         setCity(response.data.user.city);
         setGender(response.data.user.gender);
         setAddress(response.data.user.address);
-        console.log( 'name - email - mobile - age - dateofbirth - city - gender - addrees ', name, mobile, age, dateofbirth, city, gender, address)
+        console.log( 'fullname - email - mobile - age - dateofbirth - city - gender - addrees ', fullname, mobile, age, dateofbirth, city, gender, address)
       })
       .catch(function (error) {
         console.log('error: ', error);
@@ -99,9 +99,9 @@ const EditProfile = ({ navigation }) => {
 
       <View style={{ marginVertical: 10 }}>
         <TextInput style={styles.inputtext}
-          value={name}
-          onChangeText={setName}
-          placeholder="Name"
+          value={fullname}
+          onChangeText={setfullName}
+          placeholder="FullName"
         />
       </View>
       <View style={{ marginVertical: 10 }}>
@@ -155,8 +155,8 @@ const EditProfile = ({ navigation }) => {
       </View>
       <View style={styles.containerLogout}>
         <TouchableOpacity style={styles.logout} onPress={() => {
-          axios.post(`${getConstant().HOST}/users/api/updateUser/642d5c947c5c96b5db8c823b`, {
-            name: name,
+          axios.post(`${getConstant().HOST}/users/api/updateUser/643405fb825bf73be7540a7b`, {
+            name: fullname,
             mobile: mobile,
             age: age,
             gender: gender,

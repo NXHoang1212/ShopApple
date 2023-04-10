@@ -198,8 +198,9 @@ router.post('/tao-moi', [middleware.single('image'), ], async function(req, res,
  */
 router.get('/', async function(req, res, next){
   let products = await ProductController.get();
+  // Lọc sản phẩm theo danh mục nếu có thông tin danh mục
   products = products.map((p, index) => {
-    const price=  p.price.toLocaleString('vi', {style : 'currency', currency : 'VND'});
+    const price = p.price.toLocaleString('vi', {style : 'currency', currency : 'VND'});
     return {
       _id: p._id,
       name: p.name,
@@ -212,13 +213,11 @@ router.get('/', async function(req, res, next){
     }
   });
   console.log(products); 
-  // res.render('products/san-pham', { sp:products });
- res.status(200).json(products);
-}); 
+  res.status(200).json(products);
+});
 
-/**
-* xóa sản phẩm
-*/
+
+/* xóa sản phẩm */
 //http://localhost:3000:/san-pham/:id
 router.delete('/:id', async function (req, res, next){
 try{
@@ -274,33 +273,5 @@ try{
 }
 });
 
-router.post('/', (req, res, next) => {
-  const gateway = new braintree.BraintreeGateway({
-    environment: braintree.Environment.Sandbox,
-    // Use your own credentials from the sandbox Control Panel here
-    merchantId: '<use_your_merchant_id>',
-    publicKey: '<use_your_public_key>',
-    privateKey: '<use_your_private_key>'
-  });
-
-  // Use the payment method nonce here
-  const nonceFromTheClient = req.body.paymentMethodNonce;
-  // Create a new transaction for $10
-  const newTransaction = gateway.transaction.sale({
-    amount: '10.00',
-    paymentMethodNonce: nonceFromTheClient,
-    options: {
-      // This option requests the funds from the transaction
-      // once it has been authorized successfully
-      submitForSettlement: true
-    }
-  }, (error, result) => {
-      if (result) {
-        res.send(result);
-      } else {
-        res.status(500).send(error);
-      }
-  });
-});
 
 module.exports = router;

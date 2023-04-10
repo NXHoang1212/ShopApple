@@ -21,10 +21,9 @@ const ForgotPassword = ({navigation}) => {
   const goto1 = () => {
     navigation.navigate("CheckEmailVerfity");
   }
-  const goto2 = () => {
-    navigation.navigate("MyTabs");
+  const goBackToProduct = () => {
+    navigation.goBack();
   }
-
   const onEmailChange = (value) => {
     setEmail(value);
   }
@@ -43,15 +42,10 @@ const ForgotPassword = ({navigation}) => {
     });
   };
 
-  const onOtpChange = (value) => {
-    setOtp(value);
-  };
-  
-
   return (
     <View style={styles.container} >
       <View style={styles.back}>
-        <TouchableOpacity onPress={goto2}>
+        <TouchableOpacity onPress={goBackToProduct}>
           <Image style={{ width: 20, height: 20 }}
             source={require('../../assets/chevron_big_left.png')} />
         </TouchableOpacity>

@@ -41,7 +41,7 @@ const ProfileScreen = ({navigation}) => {
   }
 
   const nextScreen6 = () => {
-    navigation.navigate('CardForm');
+    navigation.navigate('ChoosePayment');
   }
 
   const takePhoto = () => {

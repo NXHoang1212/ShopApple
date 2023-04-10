@@ -75,13 +75,13 @@ const HomeChat  = ({props, navigation}) => {
   }
     
   return (
-   <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <View>
-          <View style={styles.viewImgae}>
-            <TouchableOpacity onPress={nextScreen}>
-              <Image source={require('../../assets/backone.png')} style={styles.image}/>
+   <View style={{flex: 1, backgroundColor: 'white'}}>
+      <View style={styles.header}> 
+        <View >
+          <TouchableOpacity onPress={nextScreen}>
+                <Image source={require('../../assets/backone.png')} style={styles.image}/>        
             </TouchableOpacity>
-          </View>
+        </View>
         <View style={styles.home}>
             <Image source={require('../../assets/chatbot.png')} style={{width: 58, height: 58}}/>
           <View style={styles.fitbot}>
@@ -115,31 +115,23 @@ const HomeChat  = ({props, navigation}) => {
             wrapperStyle={{  left: {backgroundColor: '#F0F0F0', width: '90%', },
           }}/>
       )}/>
-   </SafeAreaView>
+   </View>
   )
 }
 
 export default HomeChat
 
 const styles = StyleSheet.create({
-  giftedChatBackground: {
-    backgroundColor: 'white',
+ 
+  header: {
+   
   },
   viewImgae: {
-    borderWidth: 1,
-    height: 38,
-    width: 40,
-    borderRadius: 80,
-    top: 35,
-    left: 20,
-    borderColor: '#dbd9e0',
-    // backgroundColor: 'blue',
+    top: 10,
   },
   image: {
     width: 26,
     height: 26,
-    left: 5,
-    top: 5,
   },
   home: {
     flexDirection: 'row',

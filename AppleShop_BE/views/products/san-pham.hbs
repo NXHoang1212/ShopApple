@@ -29,6 +29,7 @@
                     <td>
                         <button onclick="goDetail('{{this._id}}');">Sửa</button>
                         <button onclick="goXoa('{{this._id}}');">Xóa</button>
+                        <button onclick="gocard('{{this._id}}');">Chi tiết</button>
                         <form action="/san-pham/paypal">
                             <button type="submit">Payment</button>
                         </form>
@@ -77,5 +78,8 @@
     }
     const goDetail = (id) => {
         window.location.href = `/san-pham/${id}/detail`;
+    }
+    const gocard = (id) => {
+        window.location.href = `/cart-order/cart`;
     }
 </script>

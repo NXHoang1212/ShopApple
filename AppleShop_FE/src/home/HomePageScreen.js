@@ -57,8 +57,53 @@ const HomePageScreen = ({ navigation, route }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchText, setSearchText] = useState("");
-    useEffect(() => {
-       axios.get(`${getConstant().HOST}/san-pham`)
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    axios.get(`${getConstant().HOST}/san-pham?category=Mac`)
+      .then(function (response) {
+        setProducts(response.data);
+        setFilteredProducts(response.data);
+        console.log('Products: ', response.data);
+      })
+      .catch(function (error) {
+        console.log("error: ", error);
+      });
+  }, []);
+  useEffect(() => {
+    axios.get(`${getConstant().HOST}/san-pham?category=Iphone`)
+      .then(function (response) {
+        setProducts(response.data);
+        setFilteredProducts(response.data);
+        console.log('Products: ', response.data);
+      })
+      .catch(function (error) {
+        console.log("error: ", error);
+      });
+  }, []);
+  useEffect(() => {
+    axios.get(`${getConstant().HOST}/san-pham?category=Ipad`)
+      .then(function (response) {
+        setProducts(response.data);
+        setFilteredProducts(response.data);
+        console.log('Products: ', response.data);
+      })
+      .catch(function (error) {
+        console.log("error: ", error);
+      });
+  }, []);
+  useEffect(() => {
+    axios.get(`${getConstant().HOST}/san-pham?category=Watch`)
+      .then(function (response) {
+        setProducts(response.data);
+        setFilteredProducts(response.data);
+        console.log('Products: ', response.data);
+      })
+      .catch(function (error) {
+        console.log("error: ", error);
+      });
+  }, []);
+  useEffect(() => {
+    axios.get(`${getConstant().HOST}/san-pham?category=Airpods`)
       .then(function (response) {
         setProducts(response.data);
         setFilteredProducts(response.data);
@@ -245,78 +290,78 @@ const HomePageScreen = ({ navigation, route }) => {
         {/* // tab 1 */}
         {activeTab === "Tab 1" && (
 
-<View style={stylesHome.tabText1}>
-  <View style={stylesHome.tabs1}>
-    <TouchableOpacity
-      style={[
-        stylesHome.tab1,
-        activeTab === "Tab 1.1" &&
-        stylesHome.activeTab
-      ]}
-      onPress={() => handleTabPress1("Tab 1.1")}
-    >
-      {activeTab2 === "Tab 1.1" ?
-        <View style={[stylesHome.viewmacmini, { backgroundColor: 'black' }]}>
-          <Text style={[stylesHome.textmacmini, { color: 'white' }]}>MacBook</Text>
-        </View> :
-        <View style={stylesHome.viewmacmini}>
-          <Text style={stylesHome.textmacmini}>MacBook</Text>
+      <View style={stylesHome.tabText1}>
+        <View style={stylesHome.tabs1}>
+          <TouchableOpacity
+            style={[
+              stylesHome.tab1,
+              activeTab === "Tab 1.1" &&
+              stylesHome.activeTab
+            ]}
+            onPress={() => handleTabPress1("Tab 1.1")}
+          >
+            {activeTab2 === "Tab 1.1" ?
+              <View style={[stylesHome.viewmacmini, { backgroundColor: 'black' }]}>
+                <Text style={[stylesHome.textmacmini, { color: 'white' }]}>MacBook</Text>
+              </View> :
+              <View style={stylesHome.viewmacmini}>
+                <Text style={stylesHome.textmacmini}>MacBook</Text>
+              </View>
+            }
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              stylesHome.tab1,
+              activeTab === "Tab 1.2" &&
+              stylesHome.activeTab
+            ]}
+            onPress={() => handleTabPress1("Tab 1.2")}
+          >
+            {activeTab2 === "Tab 1.2" ?
+              <View style={[stylesHome.viewimac, { backgroundColor: 'black' }]}>
+                <Text style={[stylesHome.textimac, { color: 'white' }]}>iMac</Text>
+              </View> :
+              <View style={stylesHome.viewimac}>
+                <Text style={stylesHome.textimac}>iMac</Text>
+              </View>
+            }
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              stylesHome.tab1,
+              activeTab === "Tab 1.3" &&
+              stylesHome.activeTab
+            ]}
+            onPress={() => handleTabPress1("Tab 1.3")}
+          >
+            {activeTab2 === "Tab 1.3" ?
+              <View style={[stylesHome.viewmacmini, { backgroundColor: 'black' }]}>
+                <Text style={[stylesHome.textmacmini, { color: 'white' }]}>Mac Mini</Text>
+              </View> :
+              <View style={stylesHome.viewmacmini}>
+                <Text style={stylesHome.textmacmini}>Mac Mini</Text>
+              </View>
+            }
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              stylesHome.tab1,
+              activeTab === "Tab 1.4" &&
+              stylesHome.activeTab
+            ]}
+            onPress={() => handleTabPress1("Tab 1.4")}
+          >
+            {activeTab2 === "Tab 1.4" ?
+              <View style={[stylesHome.viewmacdisplays, { backgroundColor: 'black' }]}>
+                <Text style={[stylesHome.textmacdisplays, { color: 'white' }]}>Mac Displays</Text>
+              </View> :
+              <View style={stylesHome.viewmacdisplays}>
+                <Text style={stylesHome.textmacdisplays}>Mac Displays</Text>
+              </View>
+            }
+          </TouchableOpacity>
         </View>
-      }
-    </TouchableOpacity>
-    <TouchableOpacity
-      style={[
-        stylesHome.tab1,
-        activeTab === "Tab 1.2" &&
-        stylesHome.activeTab
-      ]}
-      onPress={() => handleTabPress1("Tab 1.2")}
-    >
-      {activeTab2 === "Tab 1.2" ?
-        <View style={[stylesHome.viewimac, { backgroundColor: 'black' }]}>
-          <Text style={[stylesHome.textimac, { color: 'white' }]}>iMac</Text>
-        </View> :
-        <View style={stylesHome.viewimac}>
-          <Text style={stylesHome.textimac}>iMac</Text>
-        </View>
-      }
-    </TouchableOpacity>
-    <TouchableOpacity
-      style={[
-        stylesHome.tab1,
-        activeTab === "Tab 1.3" &&
-        stylesHome.activeTab
-      ]}
-      onPress={() => handleTabPress1("Tab 1.3")}
-    >
-      {activeTab2 === "Tab 1.3" ?
-        <View style={[stylesHome.viewmacmini, { backgroundColor: 'black' }]}>
-          <Text style={[stylesHome.textmacmini, { color: 'white' }]}>Mac Mini</Text>
-        </View> :
-        <View style={stylesHome.viewmacmini}>
-          <Text style={stylesHome.textmacmini}>Mac Mini</Text>
-        </View>
-      }
-    </TouchableOpacity>
-    <TouchableOpacity
-      style={[
-        stylesHome.tab1,
-        activeTab === "Tab 1.4" &&
-        stylesHome.activeTab
-      ]}
-      onPress={() => handleTabPress1("Tab 1.4")}
-    >
-      {activeTab2 === "Tab 1.4" ?
-        <View style={[stylesHome.viewmacdisplays, { backgroundColor: 'black' }]}>
-          <Text style={[stylesHome.textmacdisplays, { color: 'white' }]}>Mac Displays</Text>
-        </View> :
-        <View style={stylesHome.viewmacdisplays}>
-          <Text style={stylesHome.textmacdisplays}>Mac Displays</Text>
-        </View>
-      }
-    </TouchableOpacity>
-  </View>
-</View>
+      </View>
 
 )}
 {/* //tab2 */}
@@ -639,11 +684,11 @@ const HomePageScreen = ({ navigation, route }) => {
       {/* tab1 nho chuyen api */}
       {activeTab2 === "Tab 1.1" && (
         <View style={{ flex: 2 }}>
-         <FlatList
-          numColumns={2} // Hiển thị danh sách sản phẩm theo 2 cột
-          data={filteredProducts} // Dữ liệu danh sách sản phẩm (đã lọc theo danh mục nếu có)
-          renderItem={renderItem} // Component hiển thị cho từng item sản phẩm
-          keyExtractor={(item) => item._id} // Khóa duy nhất cho mỗi item
+          <FlatList
+          numColumns={2}
+          data={filteredProducts.filter(p => p.categoryId.name === 'Mac')}
+          renderItem={renderItem}
+          keyExtractor={(item) => item._id}
         />
         </View>
       )}
@@ -651,31 +696,31 @@ const HomePageScreen = ({ navigation, route }) => {
         <View style={{ flex: 2 }}>
           <FlatList
           numColumns={2}
-          data={filteredProducts}
+          data={filteredProducts.filter(p => p.categoryId.name === 'Mac')}
           renderItem={renderItem}
           keyExtractor={(item) => item._id}
-          />
+        />
         </View>
       )}
       {activeTab2 === "Tab 1.3" && (
         <View style={{ flex: 2 }}>
            <FlatList
           numColumns={2}
-          data={filteredProducts}
+          data={filteredProducts.filter(p => p.categoryId.name === 'Mac')}
           renderItem={renderItem}
           keyExtractor={(item) => item._id}
-          />
+        />
         </View>
       )}
       {activeTab2 === "Tab 1.4" && (
         <View style={{ flex: 2 }}>
           <View style={{}}>
-            <FlatList
-            numColumns={2}
-            data={filteredProducts}
-            renderItem={renderItem}
-            keyExtractor={(item) => item._id}
-            />
+          <FlatList
+          numColumns={2}
+          data={filteredProducts.filter(p => p.categoryId.name === 'Mac')}
+          renderItem={renderItem}
+          keyExtractor={(item) => item._id}
+        />
           </View>
         </View>
       )}
@@ -683,9 +728,9 @@ const HomePageScreen = ({ navigation, route }) => {
       {/* tab2 nho chuyen api */}
       {activeTab2 === "Tab 2.1" && (
         <View style={{ flex: 2 }}>
-           <FlatList
+          <FlatList
             numColumns={2}
-            data={filteredProducts}
+            data={filteredProducts.filter(p => p.categoryId.name === 'Iphone')}
             renderItem={renderItem}
             keyExtractor={(item) => item._id}
           />
@@ -695,7 +740,7 @@ const HomePageScreen = ({ navigation, route }) => {
         <View style={{ flex: 2 }}>
           <FlatList
             numColumns={2}
-            data={filteredProducts}
+            data={filteredProducts.filter(p => p.categoryId.name === 'Iphone')}
             renderItem={renderItem}
             keyExtractor={(item) => item._id}
           />
@@ -703,9 +748,9 @@ const HomePageScreen = ({ navigation, route }) => {
       )}
       {activeTab2 === "Tab 2.3" && (
         <View style={{ flex: 2 }}>
-           <FlatList
+          <FlatList
             numColumns={2}
-            data={filteredProducts}
+            data={filteredProducts.filter(p => p.categoryId.name === 'Iphone')}
             renderItem={renderItem}
             keyExtractor={(item) => item._id}
           />
@@ -714,12 +759,12 @@ const HomePageScreen = ({ navigation, route }) => {
       {activeTab2 === "Tab 2.4" && (
         <View style={{ flex: 2 }}>
           <View style={{}}>
-            <FlatList
-              numColumns={2}
-              data={filteredProducts}
-              renderItem={renderItem}
-              keyExtractor={(item) => item._id}
-            />
+          <FlatList
+            numColumns={2}
+            data={filteredProducts.filter(p => p.categoryId.name === 'Iphone')}
+            renderItem={renderItem}
+            keyExtractor={(item) => item._id}
+          />
           </View>
         </View>
       )}
@@ -727,9 +772,9 @@ const HomePageScreen = ({ navigation, route }) => {
       {/* tab3 nho chuyen api */}
       {activeTab2 === "Tab 3.1" && (
         <View style={{ flex: 2 }}>
-           <FlatList
+          <FlatList
             numColumns={2}
-            data={filteredProducts}
+            data={filteredProducts.filter(p => p.categoryId.name === 'Ipad')}
             renderItem={renderItem}
             keyExtractor={(item) => item._id}
           />
@@ -737,9 +782,9 @@ const HomePageScreen = ({ navigation, route }) => {
       )}
       {activeTab2 === "Tab 3.2" && (
         <View style={{ flex: 2 }}>
-          <FlatList
+         <FlatList
             numColumns={2}
-            data={filteredProducts}
+            data={filteredProducts.filter(p => p.categoryId.name === 'Ipad')}
             renderItem={renderItem}
             keyExtractor={(item) => item._id}
           />
@@ -747,9 +792,9 @@ const HomePageScreen = ({ navigation, route }) => {
       )}
       {activeTab2 === "Tab 3.3" && (
         <View style={{ flex: 2 }}>
-           <FlatList
+          <FlatList
             numColumns={2}
-            data={filteredProducts}
+            data={filteredProducts.filter(p => p.categoryId.name === 'Ipad')}
             renderItem={renderItem}
             keyExtractor={(item) => item._id}
           />
@@ -759,7 +804,7 @@ const HomePageScreen = ({ navigation, route }) => {
         <View style={{ flex: 2 }}>
            <FlatList
             numColumns={2}
-            data={filteredProducts}
+            data={filteredProducts.filter(p => p.categoryId.name === 'Ipad')}
             renderItem={renderItem}
             keyExtractor={(item) => item._id}
           />
@@ -771,7 +816,7 @@ const HomePageScreen = ({ navigation, route }) => {
         <View style={{ flex: 2 }}>
            <FlatList
             numColumns={2}
-            data={filteredProducts}
+            data={filteredProducts.filter(p => p.categoryId.name === 'Watch')}
             renderItem={renderItem}
             keyExtractor={(item) => item._id}
           />
@@ -781,7 +826,7 @@ const HomePageScreen = ({ navigation, route }) => {
         <View style={{ flex: 2 }}>
            <FlatList
             numColumns={2}
-            data={filteredProducts}
+            data={filteredProducts.filter(p => p.categoryId.name === 'Watch')}
             renderItem={renderItem}
             keyExtractor={(item) => item._id}
           />
@@ -789,9 +834,9 @@ const HomePageScreen = ({ navigation, route }) => {
       )}
       {activeTab2 === "Tab 4.3" && (
         <View style={{ flex: 2 }}>
-          <FlatList
+           <FlatList
             numColumns={2}
-            data={filteredProducts}
+            data={filteredProducts.filter(p => p.categoryId.name === 'Watch')}
             renderItem={renderItem}
             keyExtractor={(item) => item._id}
           />
@@ -801,7 +846,7 @@ const HomePageScreen = ({ navigation, route }) => {
         <View style={{ flex: 2 }}>
            <FlatList
             numColumns={2}
-            data={filteredProducts}
+            data={filteredProducts.filter(p => p.categoryId.name === 'Watch')}
             renderItem={renderItem}
             keyExtractor={(item) => item._id}
           />
@@ -811,9 +856,9 @@ const HomePageScreen = ({ navigation, route }) => {
       {/* tab5 nho chuyen api */}
       {activeTab2 === "Tab 5.1" && (
         <View style={{ flex: 2 }}>
-           <FlatList
+            <FlatList
             numColumns={2}
-            data={filteredProducts}
+            data={filteredProducts.filter(p => p.categoryId.name === 'Airpods')}
             renderItem={renderItem}
             keyExtractor={(item) => item._id}
           />
@@ -821,9 +866,9 @@ const HomePageScreen = ({ navigation, route }) => {
       )}
       {activeTab2 === "Tab 5.2" && (
         <View style={{ flex: 2 }}>
-           <FlatList
+            <FlatList
             numColumns={2}
-            data={filteredProducts}
+            data={filteredProducts.filter(p => p.categoryId.name === 'Airpods')}
             renderItem={renderItem}
             keyExtractor={(item) => item._id}
           />
@@ -831,9 +876,9 @@ const HomePageScreen = ({ navigation, route }) => {
       )}
       {activeTab2 === "Tab 5.3" && (
         <View style={{ flex: 2 }}>
-           <FlatList
+            <FlatList
             numColumns={2}
-            data={filteredProducts}
+            data={filteredProducts.filter(p => p.categoryId.name === 'Airpods')}
             renderItem={renderItem}
             keyExtractor={(item) => item._id}
           />
@@ -843,7 +888,7 @@ const HomePageScreen = ({ navigation, route }) => {
         <View style={{ flex: 2 }}>
           <FlatList
             numColumns={2}
-            data={filteredProducts}
+            data={filteredProducts.filter(p => p.categoryId.name === 'Airpods')}
             renderItem={renderItem}
             keyExtractor={(item) => item._id}
           />

@@ -10,30 +10,15 @@ const CartOrder = ({ navigation, route }) => {
   const { cart: cartToAdd } = route.params;
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [showModal, setShowModal] = useState(false);
-  const [status, setStatus] = useState("Pending");
 
-
-  const nextScreen = (id) => {
-    navigation.navigate("DetailProduct", { id: id });
-  };
-  const handleNavigationStateChange = (newState) => {
-    const url = newState.url;
-    if (url.includes('/success')) {
-      setShowModal(false);
-      navigation.navigate('Success');
-    } else if (url.includes('/cancel')) {
-      setShowModal(false);
-    }
-  };
 
   const nextScreen3 = () => {
-    navigation.navigate("HomaPageScreen");
+    navigation.navigate("ChoosePayment");
   };
 
-  const nextScreen2 = () => {
-    navigation.navigate("HomaPageScreen");
-  };
+  const goBackToProduct = () => {
+    navigation.goBack();
+  }
   useEffect(() => {
     const fetchCartItems = async () => {
       const cartItemsJson = await AsyncStorage.getItem('cartItems');
@@ -78,14 +63,8 @@ const CartOrder = ({ navigation, route }) => {
 
   return (
     <View style={StyleCartOrder.container}> 
-     <Modal visible={showModal} onRequestClose={() => setShowModal(false)}>
-      <WebView
-        source={{ uri: `${getConstant().HOST}/san-pham/paypal` }}
-        onNavigationStateChange={handleNavigationStateChange}
-      />
-    </Modal>
         <View style={StyleCartOrder.header}>
-          <TouchableOpacity style={{width: 55}} onPress={nextScreen}>
+          <TouchableOpacity style={{width: 55}} onPress={goBackToProduct}>
                <Image style={{left: 25, width: 30, height: 30}} source={require('../../assets/backone.png')} />
           </TouchableOpacity>
           <Text style={StyleCartOrder.textOrder}>Shopping Cart</Text>
@@ -133,12 +112,12 @@ const CartOrder = ({ navigation, route }) => {
               <Text style={StyleCartOrder.totalPrice1}>{totalPrice.toLocaleString('vi-VN' ,{style: 'currency', currency: 'VND' })}</Text>
           </View>
           <View style={StyleCartOrder.payment} >
-            <TouchableOpacity onPress={() => setShowModal(true)}>
+            <TouchableOpacity onPress={nextScreen3}>
                   <Text style={StyleCartOrder.textbutton1}>Thanh toán</Text>
             </TouchableOpacity>
           </View>
             <View style={StyleCartOrder.otherpayment}>
-              <TouchableOpacity onPress={nextScreen2}>
+              <TouchableOpacity onPress={goBackToProduct}>
                   <Text style={StyleCartOrder.textbutton2}>Chọn thêm sản phẩm khác</Text>
               </TouchableOpacity>
             </View>

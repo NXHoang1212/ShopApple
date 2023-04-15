@@ -8,7 +8,6 @@ import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-
 const ProfileScreen = ({navigation}) => {
   const [avatar, setAvatar] = useState(null);
   const [productId, setProductId] = useState(null);
@@ -84,7 +83,7 @@ const ProfileScreen = ({navigation}) => {
           />
         </TouchableOpacity>
         <Text style={ {fontSize: 18, color: '#000000', fontWeight: '500',marginBottom:10}}>
-          Welcome, Võ Ngọc Phước
+          Chào mừng, Võ Ngọc Phước
         </Text>
         <Text style={{fontSize: 16, color: '#242424',paddingBottom: 5,borderRadius: 15, backgroundColor: '#AEAEAE', padding: 5}}>
           xuanhoanggn@gmail.com
@@ -92,40 +91,40 @@ const ProfileScreen = ({navigation}) => {
       </View>
       <View style={styles.list}>
         <View style={styles.viewlist}>
-          <Text style={styles.acc}>Account</Text>
+          <Text style={styles.acc}>Tài Khoản</Text>
           <View styles={styles.viewitem}>
             <ListItem
-              title="Information"
+              title="Thông Tin"
               onPress={nextScreen}
               leading={<Icon name="account-edit" size={24} color="#000000" />}
             />
             <ListItem onPress={nextScreen5}
-              title="Change Password"
+              title="Đổi mật khẩu"
               leading={<Icon name="lock-reset" size={24} color="#000000" />}
             />
-            <Text style={styles.acc}>Shopping</Text>
+            <Text style={styles.acc}>Mua Sắm</Text>
             <ListItem onPress={nextScreen6}
-            title="Payment"
+            title="Thanh Toán"
             leading={<Icon name="credit-card-settings-outline" size={24} color="#000000" />}
             />
             <ListItem onPress={nextScreen4}
-            title="Cart" 
+            title="Đơn hàng" 
             leading={<Icon name="cart-arrow-right" size={24} color="#000000" />}
             />
             <ListItem
               onPress={nextScreen2}
-              title="Support"
+              title="Hỗ Trợ"
               leading={<Icon name="charity" size={24} color="#000000" />}
             />
             <ListItem
-              title="Voucher"
+              title="Mã giảm giá"
               leading={<Icon name="sale" size={24} color="#000000" />}
             />
           </View>
           <View style={styles.signout}>
             <TouchableOpacity onPress={nextScreen1} >
               <Text style={styles.textSignOut}>
-                SignOut
+                Đăng xuất
               </Text>
             </TouchableOpacity>
           </View>          

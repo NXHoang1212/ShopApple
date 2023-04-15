@@ -95,7 +95,7 @@ const DetailProduct = ({ navigation, route}) => {
           <Text style={stylesDetail.priceProduct}>
             {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".").replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")} VND
           </Text>
-          <Text style={stylesDetail.colorName}>COLOR:</Text>
+          <Text style={stylesDetail.colorName}>Màu Sắc:</Text>
           <View style={stylesDetail.colorProduct}>
             <TouchableOpacity style={stylesDetail.SP}>
               <View style={stylesDetail.detailSP1}></View>
@@ -110,7 +110,7 @@ const DetailProduct = ({ navigation, route}) => {
               <Text style={stylesDetail.nameSP}>Grey</Text>
             </TouchableOpacity>
           </View>
-          <Text style={stylesDetail.colorName}>Memory:</Text>
+          <Text style={stylesDetail.colorName}>Bộ Nhớ:</Text>
           <View style={stylesDetail.colorProduct}>
             <TouchableOpacity style={stylesDetail.SP}>
               <Text style={stylesDetail.nameSP}>215GB</Text>
@@ -122,7 +122,7 @@ const DetailProduct = ({ navigation, route}) => {
               <Text style={stylesDetail.nameSP}>1TB</Text>
             </TouchableOpacity>
           </View>
-          <Text style={stylesDetail.colorName}>CartOrder:</Text>
+          <Text style={stylesDetail.colorName}>Số Lượng:</Text>
           <View style={stylesDetail.buttonProduct}>
             <View style={stylesDetail.buttonSP}>
               <TouchableOpacity

@@ -26,10 +26,10 @@ const register = async (fullname, email, password, confirm_password, mobile) => 
     return user;
 }
 
-const update = async (id, fullname, age, gender, dateofbirth, city, address  ) => {
+const update = async (id, avatar, fullname, age, gender, dateofbirth, city, address  ) => {
     const user = await UserModel.findById(id);
     const model = await UserModel.findByIdAndUpdate(id,
-        { fullname, age, gender, dateofbirth, city, address  });
+        {avatar, fullname, age, gender, dateofbirth, city, address  });
     return model;
 }
 

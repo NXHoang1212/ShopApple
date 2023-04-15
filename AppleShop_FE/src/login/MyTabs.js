@@ -14,9 +14,9 @@ const MyTabs = () => {
                 source={require('../../assets/1.jpg')}></Image>
             </View>
             <Tab.Navigator>
-                <Tab.Screen name="Login" 
+                <Tab.Screen name="Đăng nhập" 
                 component={NormalLogin} options={{ tabBarLabelStyle: { fontWeight: 'bold', fontSize: 15 }}}/>
-                <Tab.Screen name="Register" 
+                <Tab.Screen name="Đăng kí" 
                 component={Tabscreen2} options={{ tabBarLabelStyle: { fontWeight: 'bold', fontSize: 15 }}}/>
             </Tab.Navigator>
         </View>

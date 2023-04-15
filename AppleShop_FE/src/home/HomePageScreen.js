@@ -8,12 +8,6 @@ import Toast from 'react-native-toast-message';
 import { Badge, Header } from "react-native-elements";
 
 const HomePageScreen = ({ navigation, route }) => {
-  //  Toast.show({
-  //   type: 'success',
-  //   text1: 'Xin chào 👋',
-  //   text2: 'Chào mừng bạn đến với AppleShop 👋',
-  //   topOffset: 10,
-  // });  
   const handlePress = (id) => {
     navigation.navigate("DetailProduct", { id: id });
   };

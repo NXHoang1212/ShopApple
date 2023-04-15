@@ -9,12 +9,13 @@ const styles = StyleSheet.create(
       margin: 20,
     },
     back: {
-      flex: 0.1,
+      bottom: 15,
       width: "100%",
     },
     scrollview: {
       width: "100%",
       flex: 0.7,
+      top: 28,
     },
     input: {
       height: 50,
@@ -35,7 +36,7 @@ const styles = StyleSheet.create(
     },
     text: {
       fontSize: 38,
-      fontWeight: "bold",
+      fontWeight: "400",
       color: "#000000",
     },
     itemBorder: {

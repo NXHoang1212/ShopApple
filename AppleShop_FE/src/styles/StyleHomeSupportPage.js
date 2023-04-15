@@ -37,37 +37,39 @@ const stylesHomeSuport = StyleSheet.create({
     fontSize: 22,
     lineHeight: 28,
     color: 'black',
+    right: 20,
+  },
+  textTitle1: {
+    textAlign: 'center',
+    fontStyle: 'normal',
+    fontWeight: '600',
+    fontSize: 22,
+    lineHeight: 28,
+    color: 'black',
   },
   viewText: {
     flex: 1,
-    justifyContent: 'center',
   },
   imageReturn: {
-
-    marginLeft: 5,
-    marginRight: 5,
+    marginLeft: 25,
+    marginRight: 15,
   },
   mainHeader: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
   },
-
-
   /* Header */
-
   body: {
     flex: 4,
+    top: 15,
   },
-
   viewSearch: {
     paddingTop: 10,
     paddingLeft: 24,
     paddingRight: 24,
     flexDirection: 'row',
-
   },
-
   TextViewSearch: {
     backgroundColor: '#F5F5F5',
     borderWidth: 1,
@@ -76,6 +78,7 @@ const stylesHomeSuport = StyleSheet.create({
     width: '100%',
     paddingLeft: 20,
     fontSize: 16,
+    top: 5,
   },
   tab: {
     paddingLeft: 24,
@@ -84,14 +87,13 @@ const stylesHomeSuport = StyleSheet.create({
     marginTop: 10,
     gap: 10,
     flexDirection: 'row',
-
+    top: 10,
   },
   viewTabRight: {
     flex: 1,
     width: 150,
     backgroundColor: '#DFF1FF',
     borderRadius: 8,
-
   },
   viewTabChat: {
     padding: 10
@@ -142,6 +144,7 @@ const stylesHomeSuport = StyleSheet.create({
     flex: 8,
     paddingLeft: 24,
     paddingRight: 24,
+    top: 35,
   },
   viewFooter1: {
     flex: 1,
@@ -172,6 +175,7 @@ const stylesHomeSuport = StyleSheet.create({
   },
   viewFooter2: {
     flex: 8,
+    bottom: 15,
   },
   notificationHeader: {
     backgroundColor: 'white',
@@ -206,7 +210,6 @@ const stylesHomeSuport = StyleSheet.create({
   viewImageFlast: {
     flex: 1,
     paddingTop: 10,
-  
   },
   viewFlast: {
   },

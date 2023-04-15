@@ -1,23 +1,28 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, Button, TextInput, Pressable, ToastAndroid, Dimensions } from 'react-native'
+import { View, Text, Image, TouchableOpacity, TextInput, Pressable, ToastAndroid, Dimensions, Platform, Button } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import getConstant from '../../ultlis/Constanst';
 import styles from '../styles/StyleEditProfile';
 import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
+import { Picker } from '@react-native-picker/picker';
+import cities from '../ArrayCity/Cities';
+import genders from '../ArrayCity/genders';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 const EditProfile = ({ navigation }) => {
-
   const windownWidth = Dimensions.get('window').width;
   const [fullname, setfullName] = useState();
   const [email, setEmail] = useState();
   const [mobile, setMobile] = useState();
   const [age, setAge] = useState();
-  const [dateofbirth, setDateofbirth] = useState();
+  const [dateofbirth, setDateofbirth] = useState('');
   const [city, setCity] = useState();
   const [gender, setGender] = useState();
   const [address, setAddress] = useState();
-  const [avatar, setAvatar] = useState(null);
-  const [user, setUser] = useState({avatar: null,});
+  const [user, setUser] = useState({ name: '', avatar: null });
+  const [date, setDate] = useState(new Date());
+  const [showPicker, setShowPicker] = useState(false);
+
   const nextScreen5 = () => {
     navigation.navigate("ProfileScreen");
   };
@@ -35,31 +40,12 @@ const EditProfile = ({ navigation }) => {
         setCity(response.data.user.city);
         setGender(response.data.user.gender);
         setAddress(response.data.user.address);
-        console.log( 'fullname - email - mobile - age - dateofbirth - city - gender - addrees ', fullname, mobile, age, dateofbirth, city, gender, address)
+        console.log('fullname - email - mobile - age - dateofbirth - city - gender - addrees ', fullname, mobile, age, dateofbirth, city, gender, address)
       })
       .catch(function (error) {
         console.log('error: ', error);
       });
   }, []);
-
-  const chooseImage = () => {
-    const options = {
-      mediaType: 'photo',
-    };
-    launchImageLibrary(options, (response) => {
-      console.log('Response = ', response);
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-        const source = { uri: response.uri };
-        setAvatar(source);
-      }
-    });
-  };
 
   const takePhoto = () => {
     const options = {
@@ -68,7 +54,6 @@ const EditProfile = ({ navigation }) => {
       quality: 0.5,
     };
     launchCamera(options, (response) => {
-      console.log('Response = ', response);
       if (response.didCancel) {
         console.log('Bạn đã không chụp lại hình ảnh của mình');
       } else if (response.error) {
@@ -76,9 +61,36 @@ const EditProfile = ({ navigation }) => {
       } else if (response.customButton) {
         console.log('User tapped custom button: ', response.customButton);
       } else {
-        setUser({...user, avatar: { uri: response.uri }});
+        setUser({ ...user, avatar: { uri: response.assets[0].uri } });
       }
     });
+  };
+
+
+  const formatDate = (date) => {
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear().toString();
+    return `${day}/${month}/${year}`;
+  };
+
+  const toggleDatePicker = () => {
+    setShowPicker(!showPicker);
+  };
+
+  const onchange = ({ type }, selectedDate) => {
+    if (type === 'set') {
+      const currentDate = selectedDate;
+      setDate(currentDate);
+
+      if (Platform.OS === "android") {
+        toggleDatePicker();
+        setDateofbirth(formatDate(currentDate));
+      }
+
+    } else {
+      toggleDatePicker();
+    }
   };
 
 
@@ -88,69 +100,107 @@ const EditProfile = ({ navigation }) => {
         <Pressable onPress={nextScreen5} style={{ left: 10, position: "absolute" }}>
           <Image source={require("../../assets/arrow-Left.png")}></Image>
         </Pressable>
-        <Text style={{ fontSize: 20, fontWeight: "600" }}>Edit Profile</Text>
+        <Text style={{ fontSize: 20, fontWeight: "600", color: "#000000" }}>Chỉnh sửa thông tin</Text>
       </View>
       <TouchableOpacity onPress={takePhoto}>
-        <Image
-          source={avatar ? { uri: avatar } : require('../../assets/phuoc.jpg')}
-          style={{ width: 100, height: 100, borderRadius: 50, alignSelf: "center", bottom: 10, borderWidth: 6, borderColor: 'white' }}
-        />
+        {user.avatar ? (
+          <Image source={{ uri: user.avatar.uri }} style={styles.uriavatar} />
+        ) : (
+          <Image source={require('../../assets/phuoc.jpg')}  style={styles.image}  />
+        )}
       </TouchableOpacity>
+
 
       <View style={{ marginVertical: 10 }}>
         <TextInput style={styles.inputtext}
           value={fullname}
           onChangeText={setfullName}
-          placeholder="FullName"
+          placeholder="Nhập họ và tên"
         />
       </View>
       <View style={{ marginVertical: 10 }}>
         <TextInput style={styles.inputtext}
           value={email}
-          placeholder="Email"
+          placeholder="Nhập email"
         />
       </View>
       <View style={{ marginVertical: 10 }}>
         <TextInput style={styles.inputtext}
           value={mobile}
           onChangeText={setMobile}
-          placeholder="Mobile"
+          placeholder="Nhập số điện thoại"
         />
       </View>
       <View style={{ marginVertical: 10 }}>
         <TextInput style={styles.inputtext}
           value={age}
           onChangeText={setAge}
-          placeholder="Age"
+          placeholder="Nhập tuổi"
         />
       </View>
       <View style={{ marginVertical: 10 }}>
-        <TextInput style={styles.inputtext}
-          value={gender}
-          onChangeText={setGender}
-          placeholder="Gender"
-        />
+        <View style={styles.inputtext}>
+          <Picker
+            mode='dropdown'
+            style={{ bottom: 3, right: 10 }}
+            selectedValue={gender}
+            removeClippedSubviews={true}
+            onValueChange={(itemValue) => setGender(itemValue)
+            }>
+            {genders.map((item, index) => {
+              return (
+                <Picker.Item key={index} label={item} value={item} />
+              );
+            })}
+          </Picker>
+        </View>
       </View>
       <View style={{ marginVertical: 10, alignItems: "stretch", }}>
         <View>
-          <TextInput style={styles.inputtext1}
-            value={dateofbirth}
-            onChangeText={setDateofbirth}
-            placeholder="Date of birth"
-          />
+          {showPicker && (
+            <DateTimePicker
+              mode="date"
+              display="calendar"
+              value={date}
+              onChange={onchange}
+              locale="vi-VN"
+            />
+          )}
+          {!showPicker && (
+            <Pressable onPress={toggleDatePicker}>
+              <TextInput style={styles.inputtext1}
+                value={dateofbirth}
+                onChangeText={setDateofbirth}
+                placeholder="Ngày sinh"
+                editable={false}
+                onPressIn={toggleDatePicker}
+              />
+            </Pressable>
+          )}
         </View>
-        <View style={{ right: -165, top: -50, paddingLeft: 30 }}>
-          <TextInput style={styles.inputtext1}
-            value={city}
-            onChangeText={setCity}
-            placeholder="city" />
+        <View style={{ right: -155, top: -50, paddingLeft: 30 }}>
+          <View style={styles.viewpicker1}>
+            <Picker
+              mode='dropdown'
+              style={{ bottom: 3, right: 10, width: 177 }}
+              selectedValue={city}
+              onValueChange={(itemValue) => setCity(itemValue)
+              }>
+              <Picker.Item label="Nơi sinh sống" value="" />
+              {cities.map((item, index) => {
+                return (
+                  <Picker.Item key={index} label={item} value={item} />
+                );
+              })}
+            </Picker>
+          </View>
         </View>
       </View>
       <View style={{ marginVertical: 40, bottom: 80 }}>
         <TextInput style={styles.inputtext}
           value={address}
           onChangeText={setAddress}
-          placeholder="Address"
+          placeholder="Địa chỉ"
         />
       </View>
       <View style={styles.containerLogout}>
@@ -173,7 +223,7 @@ const EditProfile = ({ navigation }) => {
               console.log('error: ', error);
             });
         }}>
-          <Text style={styles.textLogout}>Update</Text>
+          <Text style={styles.textLogout}>Cập nhật</Text>
         </TouchableOpacity>
       </View>
     </View>

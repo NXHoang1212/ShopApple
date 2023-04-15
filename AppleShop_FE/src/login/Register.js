@@ -42,14 +42,15 @@ const Register = ({navigation}) => {
         ToastAndroid.show('Đăng kí thất bại', ToastAndroid.SHORT);
       });
   };
-
-
+  const nextcreen = () => {
+    navigation.reset({routes: [{ name: 'MyTabs' }], });
+  }
 
   return (
     <ScrollView>
       <View style={styles.container}>
           <View style={{marginBottom:10,flexDirection:"row", justifyContent:'space-between', alignItems:"center"}}>
-            <Text style={{fontSize:40, fontWeight:"bold", color:'#000000'}}>Register</Text>
+            <Text style={{fontSize:33, fontWeight:"bold", color:'#000000'}}>Tài khoản</Text>
             <View style={{ flexDirection:"row", justifyContent:'space-between', alignItems:"center"}}>
             <TouchableOpacity style={styles.Button}>
             <Image style={{ width: 22, height: 22 }}
@@ -62,7 +63,7 @@ const Register = ({navigation}) => {
             </View>
           </View>
         <TextInput style={{ backgroundColor: '#FFFFFF', height: 58,marginLeft:2,borderRadius:10,paddingLeft:10,marginBottom:15}}
-          placeholder="Full Name"
+          placeholder="Nhập họ tên đầy đủ "
           onChangeText={text => setfullName(text)}
           value={fullname}
           onBlur={() => {
@@ -76,7 +77,7 @@ const Register = ({navigation}) => {
         />
         {fullnameError !== '' && <Text style={styles.errorMessage}>{fullnameError}</Text>}
         <TextInput  style={{ backgroundColor: '#FFFFFF', height: 58,marginLeft:2,borderRadius:10,paddingLeft:10,marginBottom:15  }}
-          placeholder="Email"
+          placeholder="Nhập email của bạn"
           onChangeText={text => setEmail(text)}
           value={email}
           keyboardType="email-address"
@@ -92,7 +93,7 @@ const Register = ({navigation}) => {
         />
        {emailError !== '' && <Text style={styles.errorMessage}>{emailError}</Text>}
         <TextInput  style={{ backgroundColor: '#FFFFFF', height: 58,marginLeft:2,borderRadius:10,paddingLeft:10,marginBottom:15  }}
-          placeholder="Password"
+          placeholder="Nhập mật khẩu"
           onChangeText={text => setPassword(text)}
           value={password}
           secureTextEntry={true}
@@ -108,7 +109,7 @@ const Register = ({navigation}) => {
         />
       {passwordError !== '' && <Text style={styles.errorMessage}>{passwordError}</Text>}
         <TextInput  style={{ backgroundColor: '#FFFFFF', height: 58,marginLeft:2,borderRadius:10,paddingLeft:10 ,marginBottom:15 }}
-          placeholder="Confirm_Password"
+          placeholder="Nhập lại mật khẩu"
           onChangeText={text => setConfirm_Password(text)}
           value={confirm_password}
           secureTextEntry={true}
@@ -124,7 +125,7 @@ const Register = ({navigation}) => {
         />
       {confirmPasswordError !== '' && <Text style={styles.errorMessage}>{confirmPasswordError}</Text>}
         <TextInput  style={{ backgroundColor: '#FFFFFF', height: 58,marginLeft:2,borderRadius:10,paddingLeft:10,marginBottom:15  }}
-          placeholder="Mobile "
+          placeholder="Số điện thoại của bạn "
           onChangeText={text => setMobile(text)}
           value={mobile}
           keyboardType="numeric"
@@ -144,11 +145,13 @@ const Register = ({navigation}) => {
         </TouchableOpacity>
         <View style={{flexDirection:"row", justifyContent:'center', alignItems:"center",}}>
             <TouchableOpacity style={styles.ButtonRegister} onPress={handleRegister}>
-              <Text style={{ color: "white", fontWeight: '700' }}>Sign-up</Text>
+              <Text style={{ color: "white", fontWeight: '700' }}>Đăng kí</Text>
             </TouchableOpacity>
           <View>
-              <Text>Already a </Text>
-              <Text>Member? Login</Text>
+            <TouchableOpacity onPress={nextcreen}>
+              <Text style={{color: '#000000', fontWeight: "700"}}>Bạn đã có tài khoản </Text>
+              <Text style={{color: '#000000', fontWeight: "700"}}>Đăng nhập ?</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>

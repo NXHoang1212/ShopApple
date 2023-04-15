@@ -5,10 +5,10 @@ import React, { useState } from 'react'
 
 const HomeSupportPage = ({ navigation }) => {
   const goback = () => {
-    navigation.navigate("ProfileScreen");
+    navigation.goBack();
   };
   const nextScreen = () => {
-    navigation.navigate("HomeChat");
+    navigation.navigate('HomeChat');
   }
   const [notifications, setNotifications] = useState([
     { id: 1, title: 'Tại sao tài khoản của tôi bị lỗi ?', message: '⚠️ Lưu ý: Trường hợp bạn nhận thấy đơn giao không thành công không phải do lỗi của bạn, vui lòng liên hệ Nhân viên CSKH AppleShop để được hỗ trợ', visible: false },
@@ -53,7 +53,7 @@ const HomeSupportPage = ({ navigation }) => {
         </View>
       </View>
       <View style={styles.body}>
-        <Text style={styles.textTitle}>Chúng tôi có thể giúp gì cho bạn?</Text>
+        <Text style={styles.textTitle1}>Chúng tôi có thể giúp gì cho bạn?</Text>
         <View style={styles.viewSearch}>
           <TextInput style={styles.TextViewSearch}
             placeholder="Search"
@@ -102,7 +102,6 @@ const HomeSupportPage = ({ navigation }) => {
             <Text style={styles.TextFooter2}>View all</Text>
           </View>
         </View>
-
         <View style={styles.viewFooter2}>
           <FlatList
             data={notifications}

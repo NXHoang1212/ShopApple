@@ -289,7 +289,7 @@ const stylesHome = StyleSheet.create({
   image: {
     top: 25,
     marginTop: -10,
-    width: 110,
+    width: 105,
     height: 88,
   },
   year: {

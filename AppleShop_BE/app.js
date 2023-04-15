@@ -4,8 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require("mongoose");
-
-
 require("./model/UserModel");
 
 
@@ -15,12 +13,12 @@ require("./model/CategoryModel");
 require("./model/ProductModel");
 
 
-
 var indexRouter = require('./routes/index');
 
 var productsRouter = require("./routes/products");
 
 var usersRouter = require('./routes/users');
+
 
 
 var app = express();
@@ -36,7 +34,6 @@ mongoose.connect('mongodb+srv://admin:123@cluster1.etst7kx.mongodb.net/AppleShop
   .catch((err) => console.log('MongoDB bị lỗi  ', err));
 
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -50,6 +47,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/san-pham", productsRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

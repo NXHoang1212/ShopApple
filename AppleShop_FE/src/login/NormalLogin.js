@@ -89,7 +89,7 @@ const NormalLogin = ({ navigation }) => {
       <View style={styles.container}>
         <TextInput
           style={{ backgroundColor: '#FFFFFF', height: 58, marginLeft: 2, borderRadius: 10, paddingLeft: 10, marginBottom: 15 }}
-          placeholder="Email"
+          placeholder="Nhập Email"
           onChangeText={setEmail}
           value={email}
           onBlur={() => {
@@ -103,7 +103,7 @@ const NormalLogin = ({ navigation }) => {
          {emailError !== '' && <Text style={styles.errorMessage}>{emailError}</Text>}
         <TextInput
           style={{ backgroundColor: '#FFFFFF', height: 58, marginLeft: 2, borderRadius: 10, paddingLeft: 10, marginBottom: 10 }}
-          placeholder="Password"
+          placeholder="Nhập mật khẩu"
           onChangeText={setPassword}
           value={password}
           secureTextEntry={true}  
@@ -117,7 +117,7 @@ const NormalLogin = ({ navigation }) => {
         />
         {passwordError !== '' && <Text style={styles.errorMessage}>{passwordError}</Text>}
         <TouchableOpacity onPress={goto1}>
-          <Text style={{ fontWeight: 'bold', marginBottom: 20, fontSize: 14, lineHeight: 21, color: '#000000' }} >Forgot password ?</Text>
+          <Text style={{ fontWeight: 'bold', marginBottom: 20, fontSize: 14, lineHeight: 21, color: '#000000' }} >Quên mật khẩu ?</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.ButtonLogin} onPress={() => {
           axios.post(`${getConstant().HOST}/users/api/login`, {
@@ -141,18 +141,20 @@ const NormalLogin = ({ navigation }) => {
               console.log('error: ', error);
             });
         }}>
-          <Text style={{ color: "white", fontSize: 17, width: 55, fontWeight: '700', lineHeight: 25 }}>Login</Text>
+          <Text style={{ color: "white", fontSize: 17, width: 88, fontWeight: '700', lineHeight: 25 }}>Đăng nhập</Text>
         </TouchableOpacity>
-        <View style={{ width: "100%", alignItems: "center", marginTop: 20, marginBottom: 10 }}><Text style={{ fontWeight: '600', fontStyle: 'normal', fontSize: 18, lineHeight: 27, color: '#000000' }}>Or</Text></View>
+        <View style={{ width: "100%", alignItems: "center", marginTop: 20, marginBottom: 10 }}>
+          <Text style={{ fontWeight: '600', fontStyle: 'normal', fontSize: 18, lineHeight: 27, color: '#000000' }}>Or</Text>
+        </View>
         <TouchableOpacity style={styles.ButtonFB} onPress={onFacebookLogin}>
           <Image style={{ width: 25, height: 25 }}
             source={require('../../assets/FacebookLogo.png')}></Image>
-          <Text style={{ color: "white", marginLeft: 10, fontSize: 20, fontWeight: '600', lineHeight: 26 }}>Login in with Facebook</Text>
+          <Text style={{ color: "white", marginLeft: 10, fontSize: 20, fontWeight: '600', lineHeight: 26 }}>Đăng nhập bằng Facebook</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.ButtonGG}>
           <Image style={{ width: 38, height: 38}}
             source={require('../../assets/gg.webp')}></Image>
-          <Text style={{ color: "black", marginLeft: 10, fontSize: 20, fontWeight: '500', lineHeight: 23 }}>Login in with Google</Text>
+          <Text style={{ color: "black", marginLeft: 10, fontSize: 20, fontWeight: '500', lineHeight: 23 }}>Đăng nhập bằng Google</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>

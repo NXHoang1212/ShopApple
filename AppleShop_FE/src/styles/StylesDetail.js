@@ -40,8 +40,8 @@ const stylesDetail = StyleSheet.create({
       left:  308,
     },
     imgProduct: {
-      width: 240,
-      height: 200,
+      width: 230,
+      height: 170,
       borderRadius: 30,
       backgroundColor: "#E5E5E6",
     },

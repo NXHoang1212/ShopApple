@@ -71,7 +71,7 @@ const HomeChat  = ({props, navigation}) => {
         setMessages(previousMessages => GiftedChat.append(previousMessages, value));
     };
   const nextScreen = () => {
-    navigation.navigate('ProfileScreen')
+    navigation.goBack();
   }
     
   return (

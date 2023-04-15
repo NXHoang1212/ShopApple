@@ -68,7 +68,7 @@ const Notification = ({navigation}) => {
             <Image style={stylesNotification.image}
             source={require('../../assets/backone.png')} />
           </TouchableOpacity>
-          <Text style={stylesNotification.textHeader}>Notification</Text>
+          <Text style={stylesNotification.textHeader}>Thông Báo</Text>
         </View>
       </View>
 

@@ -3,14 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import StyleCartOrder from '../styles/StyleCartOrder';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { WebView } from 'react-native-webview';
-import  getConstant  from '../../ultlis/Constanst';
 
 const CartOrder = ({ navigation, route }) => {
   const { cart: cartToAdd } = route.params;
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-
 
   const nextScreen3 = () => {
     navigation.navigate("ChoosePayment");
@@ -27,7 +24,6 @@ const CartOrder = ({ navigation, route }) => {
         setCartItems([...cartItems, ...cartToAdd]);
       }
     };
-
     fetchCartItems();
   }, []);
 

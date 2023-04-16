@@ -9,7 +9,6 @@ import CartOrder from "../cart/CartOrder";
 import Notificaiton from "../notification/Notification";
 import MyTabs from "../login/MyTabs";
 import ForgotPassword from "../login/ForgotPassword";
-import ResetPassword from "../login/ResetPassword";
 import HomeChat from "../support/HomeChat";
 import HomeSupportPage from "../support/HomeSupportPage";
 import CheckEmailVerfity from "../login/CheckEmailVerfity";
@@ -26,8 +25,7 @@ const StackNavigator = () => {
     <Stack.Navigator>
       {/* <Stack.Screen name="SlashSreen" component={SlashSreen} options={{ headerShown: false }} />
       <Stack.Screen name="MyTabs" component={MyTabs} options={{ headerShown: false }} /> 
-      <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{ headerShown: false }} />
-      <Stack.Screen name="ResetPassword" component={ResetPassword} options={{ headerShown: false }} /> */}
+      <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{ headerShown: false }} /> */}
       <Stack.Screen name="HomePageScreen" component={HomePageScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Notificaiton" component={Notificaiton} options={{ headerShown: false }} />
       <Stack.Screen name="DetailProduct" component={DetailProduct} options={{ headerShown: false }} />

@@ -4,10 +4,20 @@ import { Image, ScrollView, TouchableOpacity, FlatList } from "react-native";
 import axios from "axios";
 import getConstant from "../../ultlis/Constanst";
 import stylesHome from "../styles/StylesHome";
-import Toast from 'react-native-toast-message';
+import { getAvatar } from "../../ultlis/Camera";
 import { Badge, Header } from "react-native-elements";
 
 const HomePageScreen = ({ navigation, route }) => {
+  const [activeTab, setActiveTab] = useState("Tab 1");
+  const [activeTab2, setActiveTab2] = useState("Tab 1.1");
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [searchText, setSearchText] = useState("");
+  const [user, setUser] = useState({ name: "", avatar: null });
+  useEffect(() => {
+    getAvatar(setUser);
+  }, []);
+  
   const handlePress = (id) => {
     navigation.navigate("DetailProduct", { id: id });
   };
@@ -19,9 +29,6 @@ const HomePageScreen = ({ navigation, route }) => {
   const goto1 = () => {
     navigation.navigate("Notificaiton");
   };
-
-  const [activeTab, setActiveTab] = useState("Tab 1");
-  const [activeTab2, setActiveTab2] = useState("Tab 1.1");
   const handleTabPress = (tabName) => {
     setActiveTab(tabName);
   };
@@ -48,10 +55,6 @@ const HomePageScreen = ({ navigation, route }) => {
     handleTabPress(tabName);
     handleTabPress1("Tab 5.1");
   };
-  const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [searchText, setSearchText] = useState("");
-  const [categories, setCategories] = useState([]);
   useEffect(() => {
     axios.get(`${getConstant().HOST}/san-pham?category=Mac`)
       .then(function (response) {
@@ -142,7 +145,6 @@ const HomePageScreen = ({ navigation, route }) => {
   };
   return (
     <View style={stylesHome.container}>
-      {/* <Toast ref={(ref) => Toast.setRef(ref)} /> */}
       <View style={stylesHome.ViewHeader}>
         <View style={stylesHome.ViewImage1}>   
         <Image
@@ -161,10 +163,11 @@ const HomePageScreen = ({ navigation, route }) => {
           <Badge status="error" value="12" containerStyle={{position: 'absolute', width: 25}}/>
           </TouchableOpacity>
           <TouchableOpacity onPress={goto}>
-            <Image
-              style={stylesHome.tinyLogo3}
-              source={require("../../assets/phuoc.jpg")}
-            />
+          {user.avatar ? (
+          <Image source={{ uri: user.avatar.uri }} style={stylesHome.tinyLogo3} />
+        ) : (
+          <Image source={require('../../assets/phuoc.jpg')} style={stylesHome.tinyLogo3} />
+        )}
           </TouchableOpacity>
         </View>
       </View>

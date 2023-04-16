@@ -3,11 +3,12 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import getConstant from '../../ultlis/Constanst';
 import styles from '../styles/StyleEditProfile';
-import { launchImageLibrary, launchCamera } from 'react-native-image-picker';
 import { Picker } from '@react-native-picker/picker';
 import cities from '../ArrayCity/Cities';
 import genders from '../ArrayCity/genders';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { getAvatar, pickPhoto } from '../../ultlis/Camera';
+
 
 const EditProfile = ({ navigation }) => {
   const windownWidth = Dimensions.get('window').width;
@@ -19,14 +20,14 @@ const EditProfile = ({ navigation }) => {
   const [city, setCity] = useState();
   const [gender, setGender] = useState();
   const [address, setAddress] = useState();
-  const [user, setUser] = useState({ name: '', avatar: null });
+  const [user, setUser] = useState({ name: '', avatar: null});
   const [date, setDate] = useState(new Date());
   const [showPicker, setShowPicker] = useState(false);
 
   const nextScreen5 = () => {
     navigation.navigate("ProfileScreen");
   };
-
+ //hiện thông tin người dùng
   useEffect(() => {
     // Gọi API lấy thông tin người dùng
     axios.get(`${getConstant().HOST}/users/api/user/643405fb825bf73be7540a7b`)
@@ -46,27 +47,15 @@ const EditProfile = ({ navigation }) => {
         console.log('error: ', error);
       });
   }, []);
+ //lấy ảnh từ máy 
+  useEffect(() => {
+    getAvatar(setUser);
+  }, []);
 
-  const takePhoto = () => {
-    const options = {
-      mediaType: 'photo',
-      includeBase64: false,
-      quality: 0.5,
-    };
-    launchCamera(options, (response) => {
-      if (response.didCancel) {
-        console.log('Bạn đã không chụp lại hình ảnh của mình');
-      } else if (response.error) {
-        console.log('Hình ảnh của bạn bị lỗi: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-        setUser({ ...user, avatar: { uri: response.assets[0].uri } });
-      }
-    });
+  const handleTakePhoto = () => {
+    pickPhoto(user, setUser);
   };
-
-
+  
   const formatDate = (date) => {
     const day = date.getDate().toString().padStart(2, '0');
     const month = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -102,11 +91,11 @@ const EditProfile = ({ navigation }) => {
         </Pressable>
         <Text style={{ fontSize: 20, fontWeight: "600", color: "#000000" }}>Chỉnh sửa thông tin</Text>
       </View>
-      <TouchableOpacity onPress={takePhoto}>
-        {user.avatar ? (
+      <TouchableOpacity onPress={handleTakePhoto}>
+      {user.avatar ? (
           <Image source={{ uri: user.avatar.uri }} style={styles.uriavatar} />
         ) : (
-          <Image source={require('../../assets/phuoc.jpg')}  style={styles.image}  />
+          <Image source={require('../../assets/phuoc.jpg')} style={styles.image} />
         )}
       </TouchableOpacity>
 

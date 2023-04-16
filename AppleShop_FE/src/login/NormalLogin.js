@@ -3,9 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { ToastAndroid } from 'react-native';
 import { LoginButton, AccessToken, GraphRequest, GraphRequestManager, LoginManager } from 'react-native-fbsdk-next';
-import  getConstant  from '../../ultlis/Constanst';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import getConstant from '../../ultlis/Constanst';
 
 const NormalLogin = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -16,29 +14,9 @@ const NormalLogin = ({ navigation }) => {
   const goto1 = () => {
     navigation.navigate("ForgotPassword");
   }
-
   const goto = () => {
     navigation.navigate("HomePageScreen");
   };
-
-  const saveUserData = async (userData) => {
-    try {
-      await AsyncStorage.setItem('userData', JSON.stringify(userData));
-    } catch (e) {
-      console.error('Error saving user data to AsyncStorage:', e);
-    }
-  };
-
-  const getUserData = async () => {
-    try {
-      const userData = await AsyncStorage.getItem('userData');
-      return userData != null ? JSON.parse(userData) : null;
-    } catch (e) {
-      console.error('Error getting user data from AsyncStorage:', e);
-    }
-  };
-
-
   const onFacebookLogin = () => {
     LoginManager.logInWithPermissions(['public_profile', 'email']).then(
       (result) => {
@@ -65,25 +43,21 @@ const NormalLogin = ({ navigation }) => {
                   parameters: {
                     fields: {
                       string: 'email,name,first_name,middle_name,last_name',
-                    },
-                  },
+                    },},
                 },
                 responseInfoCallback
               );
               console.log(infoRequest, 'infoRequest');
               // Start the graph request.
               new GraphRequestManager().addRequest(infoRequest).start();
-            }
-          );
+            });
         }
       },
       (error) => {
         console.log(error);
         alert('Đăng nhập bị lỗi');
-      }
-    );
+      });
   };
-    
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -100,13 +74,13 @@ const NormalLogin = ({ navigation }) => {
             }
           }}
         />
-         {emailError !== '' && <Text style={styles.errorMessage}>{emailError}</Text>}
+        {emailError !== '' && <Text style={styles.errorMessage}>{emailError}</Text>}
         <TextInput
           style={{ backgroundColor: '#FFFFFF', height: 58, marginLeft: 2, borderRadius: 10, paddingLeft: 10, marginBottom: 10 }}
           placeholder="Nhập mật khẩu"
           onChangeText={setPassword}
           value={password}
-          secureTextEntry={true}  
+          secureTextEntry={true}
           onBlur={() => {
             if (!password) {
               setPasswordError('Mời bạn nhập password');
@@ -132,7 +106,6 @@ const NormalLogin = ({ navigation }) => {
                 email: response.data.user.email,
                 // add other user data as needed
               };
-              saveUserData(userData);
               ToastAndroid.show('Đăng nhập thành công', ToastAndroid.SHORT);
               goto();
             })
@@ -152,7 +125,7 @@ const NormalLogin = ({ navigation }) => {
           <Text style={{ color: "white", marginLeft: 10, fontSize: 20, fontWeight: '600', lineHeight: 26 }}>Đăng nhập bằng Facebook</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.ButtonGG}>
-          <Image style={{ width: 38, height: 38}}
+          <Image style={{ width: 38, height: 38 }}
             source={require('../../assets/gg.webp')}></Image>
           <Text style={{ color: "black", marginLeft: 10, fontSize: 20, fontWeight: '500', lineHeight: 23 }}>Đăng nhập bằng Google</Text>
         </TouchableOpacity>
@@ -191,7 +164,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     flexDirection: "row",
     marginLeft: 10,
-    marginRight: 10, 
+    marginRight: 10,
     height: 58,
     gap: 0
   },

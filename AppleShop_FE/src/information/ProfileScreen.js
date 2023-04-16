@@ -1,19 +1,20 @@
-import React, {useEffect, useState} from 'react';
-import {ListItem} from '@react-native-material/core';
-import {SafeAreaView, View, StyleSheet, Text, Button, ToastAndroid} from 'react-native';
-import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Image} from 'react-native-elements';
+import React, { useEffect, useState } from 'react';
+import { ListItem } from '@react-native-material/core';
+import { SafeAreaView, View, StyleSheet, Text, Button, ToastAndroid } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Image } from 'react-native-elements';
 import styles from '../styles/StyleProfileScreen';
-import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import axios from 'axios';
+import getConstant from '../../ultlis/Constanst';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { getAvatar } from '../../ultlis/Camera';
 
-const ProfileScreen = ({navigation}) => {
-  const [avatar, setAvatar] = useState(null);
+const ProfileScreen = ({ navigation }) => {
   const [productId, setProductId] = useState(null);
-  const [showModal, setShowModal] = useState(false);
-  const [imageUri, setImageUri] = useState(null);
-  
+  const [user, setUser] = useState({ name: '', avatar: null });
+  const [fulllname, setFulllname] = useState('');
+  const [email, setEmail] = useState('');
+
   const nextScreen = () => {
     navigation.navigate('EditProfile');
   };
@@ -37,33 +38,27 @@ const ProfileScreen = ({navigation}) => {
 
   const nextScreen5 = () => {
     navigation.navigate('ForgotPassword');
-  }
+  };
 
   const nextScreen6 = () => {
     navigation.navigate('ChoosePayment');
   }
-
-  const takePhoto = () => {
-    const options = {
-      mediaType: 'photo',
-      includeBase64: false,
-      quality: 0.5,
-    };
-    launchCamera(options, response => {
-      console.log('Response = ', response);
-  
-      if (response.didCancel) {
-        console.log('Bạn đã không chụp lại hình ảnh của mình');
-      } else if (response.error) {
-        console.log('Hình ảnh của bạn bị lỗi: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-        const source = { uri: response.uri };
-        setAvatar(source.uri); // Lưu đường dẫn của ảnh mới vào state avatar
-      }
-    });
-  };
+ //lấy ảnh từ camera
+  useEffect(() => {
+    getAvatar(setUser);
+  }, []);
+  //lấy thông tin user
+  useEffect(() => {
+    axios
+      .get(`${getConstant().HOST}/users/api/user/643405fb825bf73be7540a7b`)
+      .then(function (response) {
+        setFulllname(response.data.user.fullname);
+        setEmail(response.data.user.email);  
+      })
+      .catch(function (error) {
+        console.log("error: ", error);
+      });
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -76,17 +71,18 @@ const ProfileScreen = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <View style={styles.UploadImage}>
-      <TouchableOpacity onPress={takePhoto}>
-          <Image
-            source={avatar ? { uri: avatar } : require('../../assets/phuoc.jpg')}
-            style={styles.nameimage}
-          />
+        <TouchableOpacity>
+        {user.avatar ? (
+          <Image source={{ uri: user.avatar.uri }} style={styles.nameimage} />
+        ) : (
+          <Image source={require('../../assets/phuoc.jpg')} style={styles.nameimage} />
+        )}
         </TouchableOpacity>
-        <Text style={ {fontSize: 18, color: '#000000', fontWeight: '500',marginBottom:10}}>
-          Chào mừng, Võ Ngọc Phước
+        <Text style={{ fontSize: 18, color: '#000000', fontWeight: '500', marginBottom: 10 }}>
+          Chào mừng, {fulllname}
         </Text>
-        <Text style={{fontSize: 16, color: '#242424',paddingBottom: 5,borderRadius: 15, backgroundColor: '#AEAEAE', padding: 5}}>
-          xuanhoanggn@gmail.com
+        <Text style={{ fontSize: 16, color: '#242424', paddingBottom: 5, borderRadius: 15, backgroundColor: '#AEAEAE', padding: 5 }}>
+          {email}
         </Text>
       </View>
       <View style={styles.list}>
@@ -104,12 +100,12 @@ const ProfileScreen = ({navigation}) => {
             />
             <Text style={styles.acc}>Mua Sắm</Text>
             <ListItem onPress={nextScreen6}
-            title="Thanh Toán"
-            leading={<Icon name="credit-card-settings-outline" size={24} color="#000000" />}
+              title="Thanh Toán"
+              leading={<Icon name="credit-card-settings-outline" size={24} color="#000000" />}
             />
             <ListItem onPress={nextScreen4}
-            title="Đơn hàng" 
-            leading={<Icon name="cart-arrow-right" size={24} color="#000000" />}
+              title="Đơn hàng"
+              leading={<Icon name="cart-arrow-right" size={24} color="#000000" />}
             />
             <ListItem
               onPress={nextScreen2}
@@ -127,7 +123,7 @@ const ProfileScreen = ({navigation}) => {
                 Đăng xuất
               </Text>
             </TouchableOpacity>
-          </View>          
+          </View>
         </View>
       </View>
     </View>

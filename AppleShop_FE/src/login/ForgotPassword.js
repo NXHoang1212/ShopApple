@@ -68,7 +68,6 @@ const ForgotPassword = ({navigation}) => {
       </View>
       <View style={styles.next}>
       </View>
-
     </View>
   )
 }

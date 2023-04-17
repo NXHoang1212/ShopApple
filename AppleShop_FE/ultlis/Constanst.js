@@ -1,6 +1,6 @@
 const getConstant =  () => {
     return {
-        HOST:'http://192.168.20.76:3000',
+        HOST:'http://192.168.1.239:3000',
     }
 }
 

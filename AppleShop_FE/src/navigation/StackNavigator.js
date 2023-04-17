@@ -14,7 +14,7 @@ import HomeSupportPage from "../support/HomeSupportPage";
 import CheckEmailVerfity from "../login/CheckEmailVerfity";
 import Success from "../payment/Success";
 import ChoosePayment from "../payment/ChoosePayment";
-
+import SearchProduct from "../home/SearchProduct";
 
 
 
@@ -23,9 +23,9 @@ const Stack = createStackNavigator();
 const StackNavigator = () => {
   return (
     <Stack.Navigator>
-      {/* <Stack.Screen name="SlashSreen" component={SlashSreen} options={{ headerShown: false }} />
+      <Stack.Screen name="SlashSreen" component={SlashSreen} options={{ headerShown: false }} />
       <Stack.Screen name="MyTabs" component={MyTabs} options={{ headerShown: false }} /> 
-      <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{ headerShown: false }} /> */}
+      <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{ headerShown: false }} />
       <Stack.Screen name="HomePageScreen" component={HomePageScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Notificaiton" component={Notificaiton} options={{ headerShown: false }} />
       <Stack.Screen name="DetailProduct" component={DetailProduct} options={{ headerShown: false }} />
@@ -37,6 +37,7 @@ const StackNavigator = () => {
       <Stack.Screen name="CheckEmailVerfity" component={CheckEmailVerfity} options={{ headerShown: false }} />
       <Stack.Screen name="Success" component={Success} options={{ headerShown: false }} />
       <Stack.Screen name="ChoosePayment" component={ChoosePayment} options={{ headerShown: false }} />
+      <Stack.Screen name="SearchProduct" component={SearchProduct} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };

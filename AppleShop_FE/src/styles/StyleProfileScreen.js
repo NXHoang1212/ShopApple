@@ -8,12 +8,18 @@ const styles = StyleSheet.create({
       paddingVertical: 10,
       height: '100%',
     },
+    header: {
+      
+    },
     UploadImage: {
       alignItems: 'center',
+      bottom: 17,
     },
     image:{
       marginStart: 18,
       marginTop: 15,
+      width: 30,
+      height: 30,
     },
     nameimage:{
       width: 120,
@@ -38,7 +44,7 @@ const styles = StyleSheet.create({
       backgroundColor: '#F0F0F0', 
       justifyContent: 'space-between',
       height: '100%',
-      top: 20,
+      top: 2,
     },
     acc:{
       fontSize: 18,
@@ -53,19 +59,18 @@ const styles = StyleSheet.create({
       height: 50,
       backgroundColor: 'black',
       padding: 10,
-      marginVertical: 35,
+      marginVertical: 13,
       borderRadius: 50,
       alignSelf: 'center',
       alignItems: 'center',
       
     },
     textSignOut: {
-      fontSize: 16,
-      fontWeight: 'bold',
+      fontSize: 17,
+      fontWeight: '500',
       color: 'white',
       padding: 4,
     },
-  
   });
 
 export default styles;

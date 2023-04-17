@@ -1,9 +1,6 @@
 import { View, Text , StyleSheet, TouchableOpacity, Image, ScrollView,TextInput} from 'react-native'
 import React, {useState} from 'react'
-import { Icon } from 'react-native-elements'
-import axios from 'axios'
-import getConstant from '../../ultlis/Constanst'
-import { ToastAndroid } from 'react-native'
+import { LoginRegister, handleRegister } from '../../ultlis/LoginRegister';
 
 const Register = ({navigation}) => {
   /*Biến khai báo trong tên để sử dụng axios*/
@@ -19,28 +16,9 @@ const Register = ({navigation}) => {
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [mobileError, setMobileError] = useState('');
 
-
   const validateEmail = email => {
     const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     return regex.test(email);
-  };
-  const handleRegister = () => {
-      axios.post(`${getConstant().HOST}/users/api/register`, {
-        fullname: fullname,
-        email: email,
-        password: password,
-        confirm_password: confirm_password,
-        mobile: mobile,
-      })
-      .then(function (response) {
-        console.log('response: ',response.data);
-        ToastAndroid.show('Đăng kí thành công', ToastAndroid.SHORT);
-        navigation.reset({routes: [{ name: 'MyTabs' }], });
-      })
-      .catch(function (error) {
-        console.log('error: ',error);
-        ToastAndroid.show('Đăng kí thất bại', ToastAndroid.SHORT);
-      });
   };
   const nextcreen = () => {
     navigation.reset({routes: [{ name: 'MyTabs' }], });
@@ -141,12 +119,11 @@ const Register = ({navigation}) => {
           }}
         />
          {mobileError !== '' && <Text style={styles.errorMessage}>{mobileError}</Text>}
-        <TouchableOpacity>
-        </TouchableOpacity>
         <View style={{flexDirection:"row", justifyContent:'center', alignItems:"center",}}>
-            <TouchableOpacity style={styles.ButtonRegister} onPress={handleRegister}>
-              <Text style={{ color: "white", fontWeight: '700' }}>Đăng kí</Text>
-            </TouchableOpacity>
+              <TouchableOpacity style={styles.ButtonRegister} 
+             onPress={() => { handleRegister(fullname, email, password, confirm_password, mobile, navigation) }}>
+                <Text style={{ color: "white", fontWeight: '700' }}>Đăng kí</Text>
+              </TouchableOpacity>
           <View>
             <TouchableOpacity onPress={nextcreen}>
               <Text style={{color: '#000000', fontWeight: "700"}}>Bạn đã có tài khoản </Text>

@@ -10,7 +10,9 @@ const styles = StyleSheet.create(
     },
     back: {
       bottom: 15,
-      width: "100%",
+      width: 30,
+      height: 30,
+      alignSelf: "flex-start",
     },
     scrollview: {
       width: "100%",

@@ -7,10 +7,7 @@ import getConstant  from '../../ultlis/Constanst';
 
 const ForgotPassword = ({navigation}) => {
   const [email, setEmail] = useState('');
-
-  const goto1 = () => {
-    navigation.navigate("CheckEmailVerfity");
-  }
+  
   const goBackToProduct = () => {
     navigation.goBack();
   }
@@ -37,7 +34,7 @@ const ForgotPassword = ({navigation}) => {
       <View style={styles.back}>
         <TouchableOpacity onPress={goBackToProduct}>
           <Image style={{ width: 30, height: 30, tintColor: '#000' }}
-            source={require('../../assets/chevron_big_left.png')} />
+            source={require('../../assets/arrow-Left.png')} />
         </TouchableOpacity>
       </View>
       <View style={styles.scrollview}>

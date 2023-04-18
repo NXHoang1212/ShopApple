@@ -1,13 +1,13 @@
-import { View, Text, StyleSheet, ScrollView, Image, TextInput, KeyboardAvoidingView } from 'react-native'
+import { View, Text, StyleSheet, ScrollView, Image, TextInput, Alert } from 'react-native'
 import React, { useRef, useState, useEffect } from 'react'
 import { TouchableOpacity } from '@gorhom/bottom-sheet'
 import styles from '../styles/StyleForgotPassword'
 import axios from 'axios'
-import getConstant  from '../../ultlis/Constanst';
+import getConstant from '../../ultlis/Constanst';
 
-const ForgotPassword = ({navigation}) => {
+const ForgotPassword = ({ navigation }) => {
   const [email, setEmail] = useState('');
-  
+
   const goBackToProduct = () => {
     navigation.goBack();
   }
@@ -16,17 +16,23 @@ const ForgotPassword = ({navigation}) => {
   }
 
   const onPressSendOtp = () => {
-    axios.post(`${getConstant().HOST}/users/api/forgot-password`, {
-      email: email,
-    })
-    .then(response => {
-      navigation.navigate("CheckEmailVerfity");
-      console.log(response.data); // In ra dữ liệu trả về từ API
-    })
-    .catch(error => {
-      console.error(error);
-      // Handle error
-    });
+    if (!email) {
+      // Nếu trường nhập liệu email không có giá trị, hiển thị thông báo lỗi
+      Alert.alert("Thông Báo", "Vui lòng nhập địa chỉ email của bạn");
+      return;
+    }
+    axios
+      .post(`${getConstant().HOST}/users/api/forgot-password`, {
+        email: email,
+      })
+      .then((response) => {
+        navigation.navigate("CheckEmailVerfity");
+        console.log(response.data); // In ra dữ liệu trả về từ API
+      })
+      .catch((error) => {
+        console.error(error);
+        // Handle error
+      });
   };
 
   return (
@@ -41,7 +47,7 @@ const ForgotPassword = ({navigation}) => {
         <View style={{ marginBottom: 30 }}>
           <Text style={styles.text}>Khôi phục tài khoản</Text>
         </View>
-        <View style={styles.input}> 
+        <View style={styles.input}>
           <Image style={styles.image}
             source={require('../../assets/Mail.png')}></Image>
           <TextInput style={{ marginLeft: 50, bottom: 32 }}
@@ -54,10 +60,10 @@ const ForgotPassword = ({navigation}) => {
           <Text style={styles.TextOtp}>Đường link sẽ được gửi tới</Text>
           <Text style={styles.Textemail}>{email}</Text>
         </View>
-        <View style={{top: 150}}>
+        <View style={{ top: 150, width: 100, height: 100, alignSelf: 'center' }}>
           <TouchableOpacity onPress={onPressSendOtp}>
-            <Text 
-            style={{ fontSize: 18, color: "#fff", fontWeight: '400', textAlign: 'center',alignSelf: 'center', width: 100, height: 35,backgroundColor: '#0070F0', padding: 4, borderRadius: 18 }}>
+            <Text
+              style={{ fontSize: 18, color: "#fff", fontWeight: '400', textAlign: 'center', alignSelf: 'center', width: 100, height: 35, backgroundColor: '#0070F0', padding: 4, borderRadius: 18 }}>
               Gửi Email
             </Text>
           </TouchableOpacity>

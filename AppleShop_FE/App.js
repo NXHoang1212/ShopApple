@@ -1,14 +1,17 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { StackNavigator } from './src/navigation/StackNavigator';
+import StackNavigator from './src/navigation/StackNavigator';
 import { NavigationContainer } from '@react-navigation/native';
+import { AxiosApiProvider } from './ultlis/AxiosApi';
 
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <StackNavigator/>
-    </NavigationContainer>
+    <AxiosApiProvider>
+      <NavigationContainer>
+        <StackNavigator />
+      </NavigationContainer>
+    </AxiosApiProvider>
   )
 }
 

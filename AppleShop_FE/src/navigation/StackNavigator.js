@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import SlashSreen from "../loading/SlashScreen";
 import HomePageScreen from "../home/HomePageScreen";
@@ -15,16 +15,17 @@ import CheckEmailVerfity from "../login/CheckEmailVerfity";
 import Success from "../payment/Success";
 import ChoosePayment from "../payment/ChoosePayment";
 import SearchProduct from "../home/SearchProduct";
+import { AxiosApi } from "../../ultlis/AxiosApi";
 
 
 
 const Stack = createStackNavigator();
 
-const StackNavigator = () => {
+const Users = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="SlashSreen" component={SlashSreen} options={{ headerShown: false }} />
-      <Stack.Screen name="MyTabs" component={MyTabs} options={{ headerShown: false }} /> 
+      <Stack.Screen name="MyTabs" component={MyTabs} options={{ headerShown: false }} />
       <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{ headerShown: false }} />
       <Stack.Screen name="HomePageScreen" component={HomePageScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Notificaiton" component={Notificaiton} options={{ headerShown: false }} />
@@ -42,4 +43,16 @@ const StackNavigator = () => {
   );
 };
 
-export { StackNavigator };
+
+const StackNavigator = () => {
+  const { islogin } = useContext(AxiosApi);
+  return (
+    <>
+      {
+        islogin == false ? <Users /> : <HomePageScreen />
+      }
+    </>
+  );
+};
+export default StackNavigator;
+

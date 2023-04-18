@@ -30,7 +30,7 @@ const EditProfile = ({ navigation }) => {
  //hiện thông tin người dùng
   useEffect(() => {
     // Gọi API lấy thông tin người dùng
-    axios.get(`${getConstant().HOST}/users/api/user/643405fb825bf73be7540a7b`)
+    axios.get(`${getConstant().HOST}/users/api/user/643cef4b3ef76539bff8cdaf`)
       .then(function (response) {
         // Lưu thông tin người dùng vào state
         setfullName(response.data.user.fullname);
@@ -98,8 +98,6 @@ const EditProfile = ({ navigation }) => {
           <Image source={require('../../assets/phuoc.jpg')} style={styles.image} />
         )}
       </TouchableOpacity>
-
-
       <View style={{ marginVertical: 10 }}>
         <TextInput style={styles.inputtext}
           value={fullname}
@@ -194,7 +192,7 @@ const EditProfile = ({ navigation }) => {
       </View>
       <View style={styles.containerLogout}>
         <TouchableOpacity style={styles.logout} onPress={() => {
-          axios.post(`${getConstant().HOST}/users/api/updateUser/643405fb825bf73be7540a7b`, {
+          axios.post(`${getConstant().HOST}/users/api/updateUser/643cef4b3ef76539bff8cdaf`, {
             name: fullname,
             mobile: mobile,
             age: age,

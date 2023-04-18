@@ -1,6 +1,7 @@
 import { View, Text , StyleSheet, TouchableOpacity, Image, ScrollView,TextInput} from 'react-native'
 import React, {useState} from 'react'
-import { LoginRegister, handleRegister } from '../../ultlis/LoginRegister';
+import { handleRegister } from '../../ultlis/LoginRegister';
+import LoginFaceBook from '../../ultlis/LoginFacebook';
 
 const Register = ({navigation}) => {
   /*Biến khai báo trong tên để sử dụng axios*/
@@ -15,7 +16,6 @@ const Register = ({navigation}) => {
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [mobileError, setMobileError] = useState('');
-
   const validateEmail = email => {
     const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     return regex.test(email);
@@ -30,7 +30,7 @@ const Register = ({navigation}) => {
           <View style={{marginBottom:10,flexDirection:"row", justifyContent:'space-between', alignItems:"center"}}>
             <Text style={{fontSize:33, fontWeight:"bold", color:'#000000'}}>Tài khoản</Text>
             <View style={{ flexDirection:"row", justifyContent:'space-between', alignItems:"center"}}>
-            <TouchableOpacity style={styles.Button}>
+            <TouchableOpacity style={styles.Button} onPress={() => LoginFaceBook(navigation)}>
             <Image style={{ width: 22, height: 22 }}
               source={require('../../assets/fb3.jpg')}></Image>
           </TouchableOpacity>
@@ -121,7 +121,7 @@ const Register = ({navigation}) => {
          {mobileError !== '' && <Text style={styles.errorMessage}>{mobileError}</Text>}
         <View style={{flexDirection:"row", justifyContent:'center', alignItems:"center",}}>
               <TouchableOpacity style={styles.ButtonRegister} 
-             onPress={() => { handleRegister(fullname, email, password, confirm_password, mobile, navigation) }}>
+               onPress={() => { handleRegister(fullname, email, password, confirm_password, mobile, navigation) }}>
                 <Text style={{ color: "white", fontWeight: '700' }}>Đăng kí</Text>
               </TouchableOpacity>
           <View>

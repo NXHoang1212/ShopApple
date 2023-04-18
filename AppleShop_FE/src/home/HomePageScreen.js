@@ -1,4 +1,4 @@
-import { View, Text, Button, TextInput } from "react-native";
+import { View, Text} from "react-native";
 import React, { useState, useEffect } from "react";
 import { Image, ScrollView, TouchableOpacity, FlatList } from "react-native";
 import axios from "axios";
@@ -12,7 +12,6 @@ const HomePageScreen = ({ navigation, route }) => {
   const [activeTab2, setActiveTab2] = useState("Tab 1.1");
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [searchText, setSearchText] = useState("");
   const [user, setUser] = useState({ name: "", avatar: null });
   const handlePress = (id) => {
     navigation.navigate("DetailProduct", { id: id });
@@ -34,22 +33,6 @@ const HomePageScreen = ({ navigation, route }) => {
   const tab1 = (tabName) => {
     handleTabPress(tabName);
     handleTabPress1("Tab 1.1");
-  };
-  const tab2 = (tabName) => {
-    handleTabPress(tabName);
-    handleTabPress1("Tab 2.1");
-  };
-  const tab3 = (tabName) => {
-    handleTabPress(tabName);
-    handleTabPress1("Tab 3.1");
-  };
-  const tab4 = (tabName) => {
-    handleTabPress(tabName);
-    handleTabPress1("Tab 4.1");
-  };
-  const tab5 = (tabName) => {
-    handleTabPress(tabName);
-    handleTabPress1("Tab 5.1");
   };
   //lấy sản phẩm theo từng danh mục
   useEffect(() => {
@@ -107,16 +90,6 @@ const HomePageScreen = ({ navigation, route }) => {
         console.log("error: ", error);
       });
   }, []);
-  const handleSearch = (text) => {
-    setSearchText(text);
-    const filtered = products.filter((product) => {
-      const productName = product.name.toLowerCase();
-      const searchTextLower = text.toLowerCase();
-      return productName.startsWith(searchTextLower);
-    });
-    setFilteredProducts(filtered);
-  };
-
   const renderItem = ({ item }) => {
     const { name, year, image } = item;
     return (
@@ -177,14 +150,6 @@ const HomePageScreen = ({ navigation, route }) => {
           style={stylesHome.Logo}
           source={require("../../assets/logo2.png")}
         />
-        <View style={stylesHome.inputsearch}>
-          <TextInput
-            style={stylesHome.input}
-            onChangeText={handleSearch}
-            value={searchText}
-            placeholder="Search..."
-          />
-        </View>
       </View>
       <ScrollView
         horizontal

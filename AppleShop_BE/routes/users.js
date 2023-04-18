@@ -76,9 +76,9 @@ router.post("/cpanel/login", async function (req, res, next) {
 
 router.post("/api/updateUser/:id", async function (req, res, next) {
   try {
-    const { name, age, gender, dateofbirth, city, address } = req.body;
+    const { fullname, age, gender, dateofbirth, city, address } = req.body;
     const id = req.params.id;
-    const user = await UserController.update(id, name, age, gender, dateofbirth, city, address );
+    const user = await UserController.update(id, fullname, age, gender, dateofbirth, city, address );
     res.status(200).json({ user });
   } catch (error) {
     res.status(414).json({ error: error.message });

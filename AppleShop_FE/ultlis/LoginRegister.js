@@ -1,6 +1,7 @@
 import getConstant from './Constanst';
 import axios from 'axios';
 import { ToastAndroid } from 'react-native';
+import { Alert } from 'react-native';
 
 export const LoginRegister = (email, password, navigation) => {
   axios
@@ -20,6 +21,17 @@ export const LoginRegister = (email, password, navigation) => {
 };
 
 export const handleRegister = (fullname, email, password, confirm_password, mobile, navigation) => {
+  if (!fullname) {
+    Alert.alert('Lỗi', 'Vui lòng nhập họ tên đầy đủ');
+  } else if (!email) {
+    Alert.alert('Lỗi', 'Vui lòng nhập địa chỉ email');
+  } else if (!password) {
+    Alert.alert('Lỗi', 'Vui lòng nhập mật khẩu');
+  } else if (!confirm_password) {
+    Alert.alert('Lỗi', 'Vui lòng nhập lại mật khẩu');
+  } else if (!mobile) {
+    Alert.alert('Lỗi', 'Vui lòng nhập số điện thoại');
+  } 
   axios.post(`${getConstant().HOST}/users/api/register`, {
     fullname: fullname,
     email: email,

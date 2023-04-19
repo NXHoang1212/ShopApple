@@ -2,6 +2,7 @@ import { View, Text , StyleSheet, TouchableOpacity, Image, ScrollView,TextInput}
 import React, {useState} from 'react'
 import { handleRegister } from '../../ultlis/LoginRegister';
 import LoginFaceBook from '../../ultlis/LoginFacebook';
+import AxiosInstance from '../axios/AxiosIntance';
 
 const Register = ({navigation}) => {
   /*Biến khai báo trong tên để sử dụng axios*/
@@ -23,6 +24,7 @@ const Register = ({navigation}) => {
   const nextcreen = () => {
     navigation.reset({routes: [{ name: 'MyTabs' }], });
   }
+
 
   return (
     <ScrollView>
@@ -121,7 +123,7 @@ const Register = ({navigation}) => {
          {mobileError !== '' && <Text style={styles.errorMessage}>{mobileError}</Text>}
         <View style={{flexDirection:"row", justifyContent:'center', alignItems:"center",}}>
               <TouchableOpacity style={styles.ButtonRegister} 
-               onPress={() => { handleRegister(fullname, email, password, confirm_password, mobile, navigation) }}>
+              onPress={() => { handleRegister(fullname, email, password, confirm_password, mobile, navigation) }}>
                 <Text style={{ color: "white", fontWeight: '700' }}>Đăng kí</Text>
               </TouchableOpacity>
           <View>

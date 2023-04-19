@@ -1,8 +1,6 @@
 import { createContext } from "react";
 import { useState } from "react";
 
-
-
 export const AxiosApi = createContext();
 
 export const AxiosApiProvider = (props) => {

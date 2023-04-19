@@ -21,7 +21,7 @@ import { AxiosApi } from "../../ultlis/AxiosApi";
 
 const Stack = createStackNavigator();
 
-const Users = () => {
+const StackNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen name="SlashSreen" component={SlashSreen} options={{ headerShown: false }} />
@@ -44,15 +44,5 @@ const Users = () => {
 };
 
 
-const StackNavigator = () => {
-  const { islogin } = useContext(AxiosApi);
-  return (
-    <>
-      {
-        islogin == false ? <Users /> : <HomePageScreen />
-      }
-    </>
-  );
-};
 export default StackNavigator;
 

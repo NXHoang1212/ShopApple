@@ -3,6 +3,7 @@ var router = express.Router();
 var UserController = require("../controller/UserController");
 var jwt = require("jsonwebtoken");
 var authen = require("../middleware/authen");
+const moment = require('moment-timezone');
 
 /* GET users listing. */
 /* http://localhost:3000/users/api/register */
@@ -26,14 +27,20 @@ router.post("/api/login", async function (req, res, next) {
     if (user) {
       const access_token = jwt.sign({ user }, 'shhhhh', { expiresIn: 4 * 60 });
       const refresh_token = jwt.sign({ user }, 'shhhhh', { expiresIn: 90 * 24 * 60 * 60 });
-      res.status(200).json({ user, access_token, refresh_token });
+      const responseTimestamp = new Date().toISOString(); // lấy giờ hiện tại
+      const data = { id: user._id, token: access_token, user };
+      res.status(200).json({ error: false, responseTimestamp, statuscode: 300, data });
     } else {
-      res.status(401).json({ error: 'Sai email hoặc mật khẩu' });
+      res.status(401).json({ error: 'Sai email hoặc mật khẩu', responseTimestamp: new Date().toISOString() });
     }
   } catch (error) {
-    res.status(401).json({ error: error.message });
+    res.status(401).json({ error: error.message, responseTimestamp: new Date().toISOString() });
   }
 });
+
+
+
+
 
 router.get("/api/api-token", [authen], function (req, res, next) {
   console.log(req.user);

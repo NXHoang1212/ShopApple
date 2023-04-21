@@ -1,4 +1,5 @@
 const genders = [
+    'Giới tính',
     'Nam',
     'Nữ',
 ]

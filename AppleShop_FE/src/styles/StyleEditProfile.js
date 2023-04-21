@@ -5,7 +5,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     height: 50,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+  },
+  textmail:{
+    borderRadius: 10,
+    borderWidth: 1,
+    height: 50,
+    paddingHorizontal: 10,
+    color: '#000000',
+    textAlignVertical: 'center',
   },
   inputtext1: {
     borderRadius: 10,

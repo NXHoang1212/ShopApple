@@ -83,8 +83,8 @@ router.post("/cpanel/login", async function (req, res, next) {
 
 router.post("/api/updateUser/:id", async function (req, res, next) {
   try {
-    const { fullname, age, gender, dateofbirth, city, address } = req.body;
-    const id = req.params.id;
+    let { fullname, age, gender, dateofbirth, city, address } = req.body;
+    let { id } = req.params;
     const user = await UserController.update(id, fullname, age, gender, dateofbirth, city, address );
     res.status(200).json({ user });
   } catch (error) {
@@ -94,9 +94,9 @@ router.post("/api/updateUser/:id", async function (req, res, next) {
   }
 });
 
+
 router.get("/api/user/:id", async function (req, res, next) {
   try {
-
     const id = req.params.id;
     const user = await UserController.get(id); 
     res.status(200).json({ user });

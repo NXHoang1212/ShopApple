@@ -7,9 +7,11 @@ import { AxiosApiProvider } from './ultlis/AxiosApi';
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <StackNavigator />
-    </NavigationContainer>
+    <AxiosApiProvider>
+      <NavigationContainer>
+        <StackNavigator />
+      </NavigationContainer>
+    </AxiosApiProvider>
   )
 }
 

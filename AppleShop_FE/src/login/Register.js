@@ -1,11 +1,12 @@
-import { View, Text , StyleSheet, TouchableOpacity, Image, ScrollView,TextInput} from 'react-native'
-import React, {useState} from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, TextInput, ToastAndroid } from 'react-native'
+import React, { useState } from 'react'
 import { handleRegister } from '../../ultlis/LoginRegister';
 import LoginFaceBook from '../../ultlis/LoginFacebook';
 import AxiosInstance from '../axios/AxiosIntance';
 
-const Register = ({navigation}) => {
+const Register = (props) => {
   /*Biến khai báo trong tên để sử dụng axios*/
+  const { navigation } = props;
   const [fullname, setfullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,27 +23,53 @@ const Register = ({navigation}) => {
     return regex.test(email);
   };
   const nextcreen = () => {
-    navigation.reset({routes: [{ name: 'MyTabs' }], });
+    navigation.reset({ routes: [{ name: 'MyTabs' }], });
   }
 
+  const dangki = async () => {
+    try {
+      const response = await AxiosInstance().post('/users/api/register', {
+        fullname: fullname,
+        email: email,
+        password: password,
+        confirm_password: confirm_password,
+        mobile: mobile,
+      });
+  
+      if (response && response.user){
+        ToastAndroid.show('Đăng kí thành công', ToastAndroid.SHORT);
+        navigation.reset({routes: [{ name: 'MyTabs' }], });
+      } else {
+        ToastAndroid.show('Đăng kí thất bại', ToastAndroid.SHORT);
+      }
+  
+      console.log(response);
+  
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  
+  
+  
 
   return (
     <ScrollView>
       <View style={styles.container}>
-          <View style={{marginBottom:10,flexDirection:"row", justifyContent:'space-between', alignItems:"center"}}>
-            <Text style={{fontSize:33, fontWeight:"bold", color:'#000000'}}>Tài khoản</Text>
-            <View style={{ flexDirection:"row", justifyContent:'space-between', alignItems:"center"}}>
+        <View style={{ marginBottom: 10, flexDirection: "row", justifyContent: 'space-between', alignItems: "center" }}>
+          <Text style={{ fontSize: 33, fontWeight: "bold", color: '#000000' }}>Tài khoản</Text>
+          <View style={{ flexDirection: "row", justifyContent: 'space-between', alignItems: "center" }}>
             <TouchableOpacity style={styles.Button} onPress={() => LoginFaceBook(navigation)}>
-            <Image style={{ width: 22, height: 22 }}
-              source={require('../../assets/fb3.jpg')}></Image>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.Button}>
-            <Image style={{ width: 30, height: 30 }}
-              source={require('../../assets/gg.webp')}></Image>
-          </TouchableOpacity>
-            </View>
+              <Image style={{ width: 22, height: 22 }}
+                source={require('../../assets/fb3.jpg')}></Image>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.Button}>
+              <Image style={{ width: 30, height: 30 }}
+                source={require('../../assets/gg.webp')}></Image>
+            </TouchableOpacity>
           </View>
-        <TextInput style={{ backgroundColor: '#FFFFFF', height: 58,marginLeft:2,borderRadius:10,paddingLeft:10,marginBottom:15}}
+        </View>
+        <TextInput style={{ backgroundColor: '#FFFFFF', height: 58, marginLeft: 2, borderRadius: 10, paddingLeft: 10, marginBottom: 15 }}
           placeholder="Nhập họ tên đầy đủ "
           onChangeText={text => setfullName(text)}
           value={fullname}
@@ -56,7 +83,7 @@ const Register = ({navigation}) => {
           }}
         />
         {fullnameError !== '' && <Text style={styles.errorMessage}>{fullnameError}</Text>}
-        <TextInput  style={{ backgroundColor: '#FFFFFF', height: 58,marginLeft:2,borderRadius:10,paddingLeft:10,marginBottom:15  }}
+        <TextInput style={{ backgroundColor: '#FFFFFF', height: 58, marginLeft: 2, borderRadius: 10, paddingLeft: 10, marginBottom: 15 }}
           placeholder="Nhập email của bạn"
           onChangeText={text => setEmail(text)}
           value={email}
@@ -71,8 +98,8 @@ const Register = ({navigation}) => {
             }
           }}
         />
-       {emailError !== '' && <Text style={styles.errorMessage}>{emailError}</Text>}
-        <TextInput  style={{ backgroundColor: '#FFFFFF', height: 58,marginLeft:2,borderRadius:10,paddingLeft:10,marginBottom:15  }}
+        {emailError !== '' && <Text style={styles.errorMessage}>{emailError}</Text>}
+        <TextInput style={{ backgroundColor: '#FFFFFF', height: 58, marginLeft: 2, borderRadius: 10, paddingLeft: 10, marginBottom: 15 }}
           placeholder="Nhập mật khẩu"
           onChangeText={text => setPassword(text)}
           value={password}
@@ -87,8 +114,8 @@ const Register = ({navigation}) => {
             }
           }}
         />
-      {passwordError !== '' && <Text style={styles.errorMessage}>{passwordError}</Text>}
-        <TextInput  style={{ backgroundColor: '#FFFFFF', height: 58,marginLeft:2,borderRadius:10,paddingLeft:10 ,marginBottom:15 }}
+        {passwordError !== '' && <Text style={styles.errorMessage}>{passwordError}</Text>}
+        <TextInput style={{ backgroundColor: '#FFFFFF', height: 58, marginLeft: 2, borderRadius: 10, paddingLeft: 10, marginBottom: 15 }}
           placeholder="Nhập lại mật khẩu"
           onChangeText={text => setConfirm_Password(text)}
           value={confirm_password}
@@ -101,10 +128,10 @@ const Register = ({navigation}) => {
             } else {
               setConfirmPasswordError('');
             }
-          }}         
+          }}
         />
-      {confirmPasswordError !== '' && <Text style={styles.errorMessage}>{confirmPasswordError}</Text>}
-        <TextInput  style={{ backgroundColor: '#FFFFFF', height: 58,marginLeft:2,borderRadius:10,paddingLeft:10,marginBottom:15  }}
+        {confirmPasswordError !== '' && <Text style={styles.errorMessage}>{confirmPasswordError}</Text>}
+        <TextInput style={{ backgroundColor: '#FFFFFF', height: 58, marginLeft: 2, borderRadius: 10, paddingLeft: 10, marginBottom: 15 }}
           placeholder="Số điện thoại của bạn "
           onChangeText={text => setMobile(text)}
           value={mobile}
@@ -120,16 +147,16 @@ const Register = ({navigation}) => {
             }
           }}
         />
-         {mobileError !== '' && <Text style={styles.errorMessage}>{mobileError}</Text>}
-        <View style={{flexDirection:"row", justifyContent:'center', alignItems:"center",}}>
-              <TouchableOpacity style={styles.ButtonRegister} 
-              onPress={() => { handleRegister(fullname, email, password, confirm_password, mobile, navigation) }}>
-                <Text style={{ color: "white", fontWeight: '700' }}>Đăng kí</Text>
-              </TouchableOpacity>
+        {mobileError !== '' && <Text style={styles.errorMessage}>{mobileError}</Text>}
+        <View style={{ flexDirection: "row", justifyContent: 'center', alignItems: "center", }}>
+          <TouchableOpacity style={styles.ButtonRegister}
+            onPress={dangki}>
+            <Text style={{ color: "white", fontWeight: '700' }}>Đăng kí</Text>
+          </TouchableOpacity>
           <View>
             <TouchableOpacity onPress={nextcreen}>
-              <Text style={{color: '#000000', fontWeight: "700"}}>Bạn đã có tài khoản </Text>
-              <Text style={{color: '#000000', fontWeight: "700"}}>Đăng nhập ?</Text>
+              <Text style={{ color: '#000000', fontWeight: "700" }}>Bạn đã có tài khoản </Text>
+              <Text style={{ color: '#000000', fontWeight: "700" }}>Đăng nhập ?</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -148,25 +175,25 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   ButtonRegister: {
-    width:"60%",
+    width: "60%",
     padding: 15,
     backgroundColor: 'black',
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 20,
     flexDirection: "row",
-    marginRight:20
+    marginRight: 20
   },
   Button: {
-    width:40,
-    height:40,
-    backgroundColor:"white",
+    width: 40,
+    height: 40,
+    backgroundColor: "white",
     padding: 15,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
     flexDirection: "row",
-    marginRight:10
+    marginRight: 10
   },
   errorMessage: {
     color: 'red',

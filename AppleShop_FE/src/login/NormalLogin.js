@@ -1,17 +1,45 @@
-import { StyleSheet, TouchableOpacity, View, Text, Image, ScrollView, Alert, TextInput } from 'react-native';
-import React, { useEffect, useState, useRef } from 'react';
+import { StyleSheet, TouchableOpacity, View, Text, Image, ScrollView, Alert, TextInput, ToastAndroid } from 'react-native';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import LoginFaceBook from '../../ultlis/LoginFacebook';
 import {LoginRegister} from '../../ultlis/LoginRegister';
+import AxiosInstance from '../axios/AxiosIntance';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { AxiosApi } from '../../ultlis/AxiosApi';
 
-const NormalLogin = ({ navigation }) => {
+const NormalLogin = (props) => {
+  const {navigation} = props;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const { setislogin, setinfoUser } = useContext(AxiosApi);
 
   const goto1 = () => {
     navigation.navigate("ForgotPassword");
   }
+
+  const dangnhap = async () => {
+    try {
+      const response = await AxiosInstance().post('/users/api/login', {
+        email: email,
+        password: password,
+      });
+  
+      if (response.error == false){
+
+        console.log(response.data.token);
+        await AsyncStorage.setItem('token', response.data.token);
+        ToastAndroid.show('Đăng kí thành công', ToastAndroid.SHORT);
+        setinfoUser(response.data.user);
+        setislogin(true);
+      } else {
+        ToastAndroid.show('Đăng kí thất bại', ToastAndroid.SHORT);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -42,7 +70,7 @@ const NormalLogin = ({ navigation }) => {
         <TouchableOpacity onPress={goto1}>
           <Text style={{ fontWeight: 'bold', marginBottom: 20, fontSize: 14, lineHeight: 21, color: '#000000' }} >Quên mật khẩu ?</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.ButtonLogin} onPress={() => { LoginRegister(email, password, navigation) }}>
+        <TouchableOpacity style={styles.ButtonLogin} onPress={dangnhap}>
           <Text style={{ color: "white", fontSize: 17, width: 88, fontWeight: '700', lineHeight: 25 }}>Đăng nhập</Text>
         </TouchableOpacity>
         <View style={{ width: "100%", alignItems: "center", marginTop: 20, marginBottom: 10 }}>

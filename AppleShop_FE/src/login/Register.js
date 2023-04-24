@@ -11,16 +11,12 @@ const Register = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [confirm_password, setConfirm_Password] = useState('');
   const [mobile, setMobile] = useState('');
-  /*Biến bắt lỗi khai báo cho từng input */
+  /*Lưu hàm bắt lỗi để hiện gọi qua từ handleRegister */
   const [fullnameError, setfullNameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [mobileError, setMobileError] = useState('');
-  const validateEmail = email => {
-    const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    return regex.test(email);
-  };
   const nextcreen = () => {
     navigation.reset({ routes: [{ name: 'MyTabs' }], });
   }
@@ -45,7 +41,6 @@ const Register = ({ navigation }) => {
           placeholder="Nhập họ tên đầy đủ "
           onChangeText={text => setfullName(text)}
           value={fullname}
-    
         />
         {fullnameError !== '' && <Text style={styles.errorMessage}>{fullnameError}</Text>}
         <TextInput style={{ backgroundColor: '#FFFFFF', height: 58, marginLeft: 2, borderRadius: 10, paddingLeft: 10, marginBottom: 15 }}
@@ -53,7 +48,6 @@ const Register = ({ navigation }) => {
           onChangeText={text => setEmail(text)}
           value={email}
           keyboardType="email-address"
-        
         />
         {emailError !== '' && <Text style={styles.errorMessage}>{emailError}</Text>}
         <TextInput style={{ backgroundColor: '#FFFFFF', height: 58, marginLeft: 2, borderRadius: 10, paddingLeft: 10, marginBottom: 15 }}
@@ -61,7 +55,6 @@ const Register = ({ navigation }) => {
           onChangeText={text => setPassword(text)}
           value={password}
           secureTextEntry={true}
-          
         />
         {passwordError !== '' && <Text style={styles.errorMessage}>{passwordError}</Text>}
         <TextInput style={{ backgroundColor: '#FFFFFF', height: 58, marginLeft: 2, borderRadius: 10, paddingLeft: 10, marginBottom: 15 }}
@@ -69,7 +62,6 @@ const Register = ({ navigation }) => {
           onChangeText={text => setConfirm_Password(text)}
           value={confirm_password}
           secureTextEntry={true}
-        
         />
         {confirmPasswordError !== '' && <Text style={styles.errorMessage}>{confirmPasswordError}</Text>}
         <TextInput style={{ backgroundColor: '#FFFFFF', height: 58, marginLeft: 2, borderRadius: 10, paddingLeft: 10, marginBottom: 15 }}
@@ -77,7 +69,6 @@ const Register = ({ navigation }) => {
           onChangeText={text => setMobile(text)}
           value={mobile}
           keyboardType="numeric"
-          
         />
         {mobileError !== '' && <Text style={styles.errorMessage}>{mobileError}</Text>}
         <View style={{ flexDirection: "row", justifyContent: 'center', alignItems: "center", }}>

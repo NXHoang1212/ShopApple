@@ -4,9 +4,8 @@ import { handleRegister } from '../../ultlis/LoginRegister';
 import LoginFaceBook from '../../ultlis/LoginFacebook';
 import AxiosInstance from '../axios/AxiosIntance';
 
-const Register = (props) => {
+const Register = ({ navigation }) => {
   /*Biến khai báo trong tên để sử dụng axios*/
-  const { navigation } = props;
   const [fullname, setfullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,33 +24,6 @@ const Register = (props) => {
   const nextcreen = () => {
     navigation.reset({ routes: [{ name: 'MyTabs' }], });
   }
-
-  const dangki = async () => {
-    try {
-      const response = await AxiosInstance().post('/users/api/register', {
-        fullname: fullname,
-        email: email,
-        password: password,
-        confirm_password: confirm_password,
-        mobile: mobile,
-      });
-  
-      if (response && response.user){
-        ToastAndroid.show('Đăng kí thành công', ToastAndroid.SHORT);
-        navigation.reset({routes: [{ name: 'MyTabs' }], });
-      } else {
-        ToastAndroid.show('Đăng kí thất bại', ToastAndroid.SHORT);
-      }
-  
-      console.log(response);
-  
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  
-  
-  
 
   return (
     <ScrollView>
@@ -73,14 +45,7 @@ const Register = (props) => {
           placeholder="Nhập họ tên đầy đủ "
           onChangeText={text => setfullName(text)}
           value={fullname}
-          onBlur={() => {
-            const fullnameArray = fullname.split(' ');
-            if (fullnameArray.length < 2) {
-              setfullNameError('Mời bạn nhập đầy đủ họ tên');
-            } else {
-              setfullNameError('');
-            }
-          }}
+    
         />
         {fullnameError !== '' && <Text style={styles.errorMessage}>{fullnameError}</Text>}
         <TextInput style={{ backgroundColor: '#FFFFFF', height: 58, marginLeft: 2, borderRadius: 10, paddingLeft: 10, marginBottom: 15 }}
@@ -88,15 +53,7 @@ const Register = (props) => {
           onChangeText={text => setEmail(text)}
           value={email}
           keyboardType="email-address"
-          onBlur={() => {
-            if (!email) {
-              setEmailError('Mời bạn nhập email');
-            } else if (!validateEmail(email)) {
-              setEmailError('Email không hợp lệ mời bạn nhập lại');
-            } else {
-              setEmailError('');
-            }
-          }}
+        
         />
         {emailError !== '' && <Text style={styles.errorMessage}>{emailError}</Text>}
         <TextInput style={{ backgroundColor: '#FFFFFF', height: 58, marginLeft: 2, borderRadius: 10, paddingLeft: 10, marginBottom: 15 }}
@@ -104,15 +61,7 @@ const Register = (props) => {
           onChangeText={text => setPassword(text)}
           value={password}
           secureTextEntry={true}
-          onBlur={() => {
-            if (!password) {
-              setPasswordError('Mời bạn nhập mật khẩu');
-            } else if (password.length < 5) {
-              setPasswordError('Mật khẩu phải có ít nhất 5 ký tự');
-            } else {
-              setPasswordError('');
-            }
-          }}
+          
         />
         {passwordError !== '' && <Text style={styles.errorMessage}>{passwordError}</Text>}
         <TextInput style={{ backgroundColor: '#FFFFFF', height: 58, marginLeft: 2, borderRadius: 10, paddingLeft: 10, marginBottom: 15 }}
@@ -120,15 +69,7 @@ const Register = (props) => {
           onChangeText={text => setConfirm_Password(text)}
           value={confirm_password}
           secureTextEntry={true}
-          onBlur={() => {
-            if (!confirm_password) {
-              setConfirmPasswordError('Mời bạn nhập lại mật khẩu');
-            } else if (confirm_password !== password) {
-              setConfirmPasswordError('Mật khẩu không khớp vui lòng nhập lại');
-            } else {
-              setConfirmPasswordError('');
-            }
-          }}
+        
         />
         {confirmPasswordError !== '' && <Text style={styles.errorMessage}>{confirmPasswordError}</Text>}
         <TextInput style={{ backgroundColor: '#FFFFFF', height: 58, marginLeft: 2, borderRadius: 10, paddingLeft: 10, marginBottom: 15 }}
@@ -136,21 +77,15 @@ const Register = (props) => {
           onChangeText={text => setMobile(text)}
           value={mobile}
           keyboardType="numeric"
-          onBlur={() => {
-            const mobileRegex = /^[0-9]{10}$/; // Biểu thức chính quy để kiểm tra định dạng số điện thoại
-            if (!mobile) {
-              setMobileError('Số điện thoại không hợp lệ mời bạn nhập lại');
-            } else if (!mobileRegex.test(mobile)) {
-              setMobileError('Số điện thoại này không đúng định dạng mời bạn nhập lại');
-            } else {
-              setMobileError('');
-            }
-          }}
+          
         />
         {mobileError !== '' && <Text style={styles.errorMessage}>{mobileError}</Text>}
         <View style={{ flexDirection: "row", justifyContent: 'center', alignItems: "center", }}>
           <TouchableOpacity style={styles.ButtonRegister}
-            onPress={dangki}>
+            onPress={() => {
+              handleRegister(fullname, email, password, confirm_password, mobile, navigation,
+                setfullNameError, setEmailError, setMobileError, setPasswordError, setConfirmPasswordError)
+            }}>
             <Text style={{ color: "white", fontWeight: '700' }}>Đăng kí</Text>
           </TouchableOpacity>
           <View>

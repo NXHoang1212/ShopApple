@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ListItem } from '@react-native-material/core';
 import { Alert, View, Text, ToastAndroid, Modal } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -9,13 +9,13 @@ import getConstant from '../../ultlis/Constanst';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { getAvatar } from '../../ultlis/Camera';
 import SignOut from '../../ultlis/SignOut';
-import { AxiosApi } from '../../ultlis/AxiosApi';
 
 const ProfileScreen = ({ navigation}) => {
   const [productId, setProductId] = useState(null);
   const [user, setUser] = useState({ name: '', avatar: null });
+  const [fulllname, setFulllname] = useState('');
+  const [email, setEmail] = useState('');
   const [isDialogVisible, setIsDialogVisible] = useState(false);
-  const { infoUser } = useContext(AxiosApi);
   const nextScreen = () => {
     navigation.navigate('EditProfile');
   };
@@ -37,6 +37,18 @@ const ProfileScreen = ({ navigation}) => {
   //lấy ảnh từ camera
   useEffect(() => {
     getAvatar(setUser);
+  }, []);
+  //lấy thông tin user
+  useEffect(() => {
+    axios
+      .get(`${getConstant().HOST}/users/api/user/643cef4b3ef76539bff8cdaf`)
+      .then(function (response) {
+        setFulllname(response.data.user.fullname);
+        setEmail(response.data.user.email);
+      })
+      .catch(function (error) {
+        console.log("error: ", error);
+      });
   }, []);
   const onCancelPress = () => {
     setIsDialogVisible(false);
@@ -68,10 +80,10 @@ const ProfileScreen = ({ navigation}) => {
             )}
           </TouchableOpacity>
           <Text style={{ fontSize: 18, color: '#000000', fontWeight: '500', marginBottom: 10 }}>
-            Chào mừng, {infoUser.fullname}
+            Chào mừng, {fulllname}
           </Text>
           <Text style={{ fontSize: 16, color: '#242424', paddingBottom: 5, borderRadius: 15, backgroundColor: '#AEAEAE', padding: 5 }}>
-              {infoUser.email}
+            {email}
           </Text>
         </View>
         <View style={styles.list}>
